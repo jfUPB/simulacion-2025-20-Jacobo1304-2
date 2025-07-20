@@ -39,3 +39,42 @@ Modifica el código de la caminata aleatoria para que utilice una distribución 
 Aqui se le agrega un random extra con probabilidad 50% 50%, si es 0, se va para la derecha, y si es 1 se va para la izquierda, entonces favorece la derecha pues la derecha ya tenía una probabilidad de salir.
 
 ### Actividad 5 : Distribución normal.
+En este ejercicio se cambiaron los circulos por una cantidad fija de rectangulos transparentes que se van pintando de color rojo poco a poco segun una distribución normal:
+<img width="645" height="411" alt="{3202A01C-2B94-440F-AE47-26BF582C28C6}" src="https://github.com/user-attachments/assets/eeb79959-91b9-4472-9e85-f1d77d40bb4a" />
+
+El código para ello es el siguiente:
+let rectCount = 100;
+let rectWidth;
+let opacities = [];
+
+function setup() {
+  createCanvas(640, 240);
+  rectWidth = width / rectCount;
+
+  // Inicializar opacidades en 0
+  for (let i = 0; i < rectCount; i++) {
+    opacities[i] = 0;
+  }
+
+  noStroke();
+  frameRate(60); // más lento si quieres ver cómo se construye
+}
+
+function draw() {
+  // Distribución normal centrada en la mitad del canvas
+  let x = randomGaussian(width / 2, width / 10); // desvío: width/8 ≈ 80
+  let index = floor(map(x, 0, width, 0, rectCount));
+
+  // Asegurarse de que el índice esté en el rango válido
+  index = constrain(index, 0, rectCount - 1);
+
+  // Aumentar la opacidad del rectángulo seleccionado
+  opacities[index] = min(opacities[index] + 1, 255);
+
+  // Dibujar todos los rectángulos
+  for (let i = 0; i < rectCount; i++) {
+    fill(255, 0, 0, opacities[i]); // rojo con opacidad variable
+    rect(i * rectWidth, 0, rectWidth, height);
+  }
+}
+
