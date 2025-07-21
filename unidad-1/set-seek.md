@@ -166,7 +166,7 @@ Aprovechando la suavidad que puede dar el ruido perlin, y evitar campos bruscos,
 <img width="911" height="369" alt="{7E0714B5-10B9-4916-8219-29C1ED958C56}" src="https://github.com/user-attachments/assets/853fb6fd-265d-4f8d-9472-8ceeffff53f7" />
 El siguiente es un codigo con lineas en una cuadricula, que van variando su rotación en z en base a un ruido perlin. Y junto a un fondo transparente que da el efecto de desvanecimiento o una "cola" logra un efecto muy bacano de un campo que va fluctuando con la rotación de esas lineas.
 Aqui el código:
-```
+```js
 let cols, rows;
 let spacing = 20;
 let zoff = 0;
@@ -209,4 +209,4 @@ function draw() {
   zoff += 0.01; // animar suavemente el ruido en el tiempo
 }
 ```
-
+Con el tiempo se podría jugar con esto, para cambiar colores o tal vez tamaños y lograr resultados interesantes.
