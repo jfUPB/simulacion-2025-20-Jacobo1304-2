@@ -107,3 +107,25 @@ Evalúa la respuesta a estas preguntas y solicitudes: [1. Crea un nuevo sketch e
 > **0 (No Realizado):** No se presenta ninguna respuesta en la bitácora para esta actividad.  
 
 **Calificación Obtenida:** `[  ]` / 5
+
+---
+
+# Fase set seek
+
+## **Puntuación Final Apply:** `[  ]` / 5
+
+### Creación de obra generativa interactiva (Actividad 08)
+
+Evalúa la respuesta a estas preguntas y solicitudes: [1. Crear una obra generativa interactiva en tiempo real que combine al menos tres conceptos de la unidad. 2. Reportar en la bitácora: la explicación del concepto de la obra, el código, el enlace al sketch y una captura de pantalla.]
+
+> **5 (Completo y Preciso):** El sketch es una obra generativa, interactiva en tiempo real y combina de manera funcional y coherente al menos tres conceptos de la unidad. La bitácora contiene los cuatro elementos solicitados: una explicación clara del concepto de la obra, el código completo, un enlace funcional al sketch y una captura de pantalla.
+> **4 (Logrado):** La obra funciona y combina los tres conceptos, pero la bitácora presenta una omisión menor (falta la captura de pantalla o el enlace está roto) O la explicación del concepto de la obra es muy superficial. Alternativamente, la obra solo combina dos conceptos de manera robusta y un tercero de forma muy básica.
+> **3 (Suficiente):** La obra implementa únicamente dos de los conceptos requeridos, O no es interactiva. Además, en la bitácora faltan dos de los cuatro elementos solicitados (p. ej., solo se entrega el código y el enlace).
+> **2 (En Desarrollo):** La obra implementa solo un concepto de la unidad, O es una copia de un ejemplo anterior con modificaciones mínimas. La mayoría de los elementos solicitados en la bitácora están ausentes.
+> **1 (Inicial):** Se entrega un sketch que no utiliza los conceptos de la unidad o no cumple con ser una obra generativa e interactiva. No hay explicación ni contexto.
+> **0 (No Realizado):** No se presenta evidencia alguna para el criterio. La sección correspondiente en la bitácora está en blanco o no se entrega.
+
+**Calificación Obtenida:** `[  ]` / 5
+
+---
+
