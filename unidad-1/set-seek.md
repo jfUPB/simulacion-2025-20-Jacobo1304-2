@@ -43,6 +43,7 @@ En este ejercicio se cambiaron los circulos por una cantidad fija de rectangulos
 <img width="645" height="411" alt="{3202A01C-2B94-440F-AE47-26BF582C28C6}" src="https://github.com/user-attachments/assets/eeb79959-91b9-4472-9e85-f1d77d40bb4a" />
 
 El código para ello es el siguiente:
+``` js
 let rectCount = 100;
 let rectWidth;
 let opacities = [];
@@ -57,7 +58,7 @@ function setup() {
   }
 
   noStroke();
-  frameRate(60); // más lento si quieres ver cómo se construye
+  frameRate(60);
 }
 
 function draw() {
@@ -77,4 +78,135 @@ function draw() {
     rect(i * rectWidth, 0, rectWidth, height);
   }
 }
+```
+
+### Actividad 6
+A continuación una variación del walker con un easter egg personalizable, que sale 1 de cada 500 veces, apareciendo un texto y dando un salto más grande.
+<img width="880" height="334" alt="{69996CF4-A03D-4AEB-8B3C-6397ACC8961B}" src="https://github.com/user-attachments/assets/2bb75a4d-3616-4a72-81e3-fbf133f292c5" />
+Al principio traté de usar una imagen para el easter egg y esperaba que apareciera por 1 segundo como una eventualidad, pero decidi hacerlo con texto. Y al final si funcionó.
+Código:
+```
+let walker;
+let showEasterEgg = false;
+let easterEggStartTime = 0;
+let soundEffect;
+
+
+
+function setup() {
+  createCanvas(640, 240);
+  walker = new Walker();
+  background(0);
+  textAlign(CENTER, CENTER);
+  textSize(48);
+  fill(255, 0, 0);
+}
+
+function draw() {
+  // Fondo translúcido para efecto de rastro
+  fill(0, 10);
+  noStroke();
+  rect(0, 0, width, height);
+
+  walker.step();
+  walker.show();
+
+  // Mostrar el texto "Easter egg" si está activado
+  if (showEasterEgg) {
+    fill(255, 0, 0, 200); // rojo brillante
+    text("Easter egg", width / 2, height / 2);
+
+    // Verificamos si ha pasado 1 segundo
+    if (millis() - easterEggStartTime > 1000) {
+      showEasterEgg = false;
+    }
+  }
+}
+
+class Walker {
+  constructor() {
+    this.x = width / 2;
+    this.y = height / 2;
+  }
+
+  show() {
+    let r = random(200, 255);
+    let g = random(200, 255);
+    let b = random(200, 255);
+    fill(r, g, b, 100);
+    noStroke();
+    ellipse(this.x, this.y, 8, 8);
+  }
+
+  step() {
+    // Movimiento normal
+    let stepSize = 1;
+
+    // Probabilidad de 1 en 100 para un salto tipo Levy
+    if (floor(random(500)) === 1) {
+      stepSize = random(50, 100); // Salto grande
+      showEasterEgg = true;
+      easterEggStartTime = millis(); // Iniciar temporizador
+    }
+
+    // Movimiento aleatorio
+    this.x += random(-stepSize, stepSize);
+    this.y += random(-stepSize, stepSize);
+
+    // Limitar dentro del canvas
+    this.x = constrain(this.x, 0, width);
+    this.y = constrain(this.y, 0, height);
+  }
+}
+```
+### Actividad 7
+El campo de flujo con ruido perlin: 
+Aprovechando la suavidad que puede dar el ruido perlin, y evitar campos bruscos, me interesó hacer algo como una masa moviendose o un campo fluctuando en partes individuales, me decidí por la segundo y me puse manos a la obra, esperando tener algo que parezca organico cambiando valores suavemente. Con ayuda de chatgpt trabajamos y logramos lo siguiente...
+#### Resultado
+<img width="911" height="369" alt="{7E0714B5-10B9-4916-8219-29C1ED958C56}" src="https://github.com/user-attachments/assets/853fb6fd-265d-4f8d-9472-8ceeffff53f7" />
+El siguiente es un codigo con lineas en una cuadricula, que van variando su rotación en z en base a un ruido perlin. Y junto a un fondo transparente que da el efecto de desvanecimiento o una "cola" logra un efecto muy bacano de un campo que va fluctuando con la rotación de esas lineas.
+Aqui el código:
+```
+let cols, rows;
+let spacing = 20;
+let zoff = 0;
+
+function setup() {
+  createCanvas(640, 240);
+  cols = floor(width / spacing);
+  rows = floor(height / spacing);
+  background(0);
+  stroke(255, 100); // líneas blancas semitransparentes
+}
+
+function draw() {
+  background(0, 20); // fondo semitransparente para dejar rastros suaves
+  let xoff = 0;
+
+  for (let x = 0; x < cols; x++) {
+    let yoff = 0;
+    for (let y = 0; y < rows; y++) {
+      // Obtener ángulo desde ruido Perlin
+      let angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
+      let v = p5.Vector.fromAngle(angle);
+
+      // Coordenadas del punto
+      let px = x * spacing;
+      let py = y * spacing;
+
+      push();
+      translate(px, py);
+      rotate(v.heading());
+      strokeWeight(1);
+      line(0, 0, spacing, 0); // dibujar una línea pequeña en la dirección del vector
+      pop();
+
+      yoff += 0.1;
+    }
+    xoff += 0.1;
+  }
+
+  zoff += 0.01; // animar suavemente el ruido en el tiempo
+}
+```
 
