@@ -43,4 +43,22 @@ El desafío fue en realidad sabe como y en donde implementar cada técnica, y ad
 Controlar el rendimiento, aplicar el noise de manera correcta. Y simplemente evitar cambios tan bruscos.
 
 ### Actividad 10:
-Se analizo el trabajo de Nicolas Isaza, basado en una abeja que recoge polen.
+Se analizo el trabajo de Nicolas Isaza, basado en una abeja que recoge polen. 
+### Dirígete a la entrada de la Actividad 08: creación de obra generativa de tu compañero. Lee su concepto, interactúa con su sketch y analiza su código.
+
+### Basándote en la rúbrica para la actividad 08 evalúa el trabajo del compañero y escribe un comentario de retroalimentación constructiva. Esto lo harás en tu bitácora de aprendizaje.
+El código hace propiamente uso de randoms como el noise, el walker, y random. Se pudo haber hecho un poco más interactiva como algo para controlar la abeja pero en general está muy bien, inclusive los colores se gestionan de forma aleatoria. También le recomendé al compañero usar Levy flight a veces para dar dinamismo y sorpresa. Pero el uso de las nubes y el movimiento de la abeja se ve muy bien, además de los diseños utilizados.
+### Conversa con tu compañero sobre su obra y tu feedback. Escucha sus reflexiones y comparte tus propias ideas.
+Conversamos 👍.
+
+### Actividad 11: feedback
+### Continuar: ¿Qué actividad, ejemplo o explicación de esta unidad te resultó más reveladora o útil para tu aprendizaje? ¿Qué deberíamos mantener sí o sí?
+Claramente se tendría que mantener el libro de The nature of code, y lo que se podría ir cambiando semestre a semestre claramente es el ejemplo del estudiante para analizar la aleatoriedad.
+### Dejar de hacer: ¿Hubo alguna actividad o concepto que te pareció redundante, confuso o menos útil? ¿Hay algo que eliminarías o cambiarías por completo?
+Ninguna me pareció menos útil o redundante, la que menos me gustó fue la distrubución normal, pues no se por que después de procesos estocásticos me acabó cayendo mal ese tema, pero eso ya es personal, si fue util ver como se usaba.
+### Empezar a hacer: ¿Qué te faltó en esta unidad? ¿Quizás más ejemplos de artistas, más desafíos técnicos, más teoría? ¿Qué idea tienes para hacerla mejor?
+Los ejemplos de artistas siempre son bacanos, tal vez integrar videitos, o aleatoriedad en juegos / experiencias interactivas conocidas sería bacano.
+### Balance Teoría-Práctica: ¿Cómo sentiste el equilibrio entre analizar los ejemplos del texto guía y ponerte a programar tus propios sketches? Explica tu respuesta.
+Es un buen equilibrio, aunque a veces uno está perdido en el diseño y no sabe que hacer con la aleatoriedad, al final llegan ideas, y dandole play al p5 y viendo lo que va apareciendo el cerebro empieza a trabajar y a desarrollar ideas.
+### Comentario Adicional: ¿Hay algo más que quieras compartir sobre tu experiencia en esta unidad?
+Me gustó el resultado final de la actividad 8, se arman figuras interesantes de la aleatoriedad.
