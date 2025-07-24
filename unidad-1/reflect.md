@@ -42,3 +42,5 @@ El desafío fue en realidad sabe como y en donde implementar cada técnica, y ad
 ### Si tuvieras que empezar la Actividad 08 de nuevo, ¿Qué harías de manera diferente basándote en lo que sabes ahora?
 Controlar el rendimiento, aplicar el noise de manera correcta. Y simplemente evitar cambios tan bruscos.
 
+### Actividad 10:
+Se analizo el trabajo de Nicolas Isaza, basado en una abeja que recoge polen.
