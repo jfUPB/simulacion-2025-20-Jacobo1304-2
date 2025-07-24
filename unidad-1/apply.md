@@ -108,6 +108,14 @@ function mouseReleased() {
   clicked = false;
 }
 ```
+Idea inicial de cambio de dirección:
+<img width="1721" height="683" alt="image" src="https://github.com/user-attachments/assets/cb6afaaa-4c1f-4810-8e46-bb58063a22bc" />
+
+Cambio de logica para angulos más sutiles y ramificación:
+<img width="1724" height="655" alt="image" src="https://github.com/user-attachments/assets/c35ceb69-18b0-4b9a-808c-0657cfa63d9b" />
+
+Código final
+```js
 let clickX = null;
 let clickY = null;
 let clicked = false;
@@ -119,13 +127,11 @@ function setup() {
 }
 
 function draw() {
-  // Solo dibuja cuando hay walkers activos
   if (clicked) {
     fill(255);
     noStroke();
-    ellipse(clickX, clickY, 10, 10);
+  //  ellipse(clickX, clickY, 10, 10);
 
-    // Mostrar y mover cada walker
     for (let w of walkers) {
       w.step();
       w.show();
@@ -137,49 +143,62 @@ function mousePressed() {
   clickX = mouseX;
   clickY = mouseY;
   clicked = true;
-
-  // Crea 4 walkers diagonales
   walkers = [];
-  for (let i = 0; i < 4; i++) {
-    walkers.push(new Walker(clickX, clickY, i));
+
+  // Inicial: 4 diagonales clásicas
+  let angles = [PI / 4, (3 * PI) / 4, (5 * PI) / 4, (7 * PI) / 4];
+  for (let angle of angles) {
+    walkers.push(new Walker(clickX, clickY, angle));
   }
 }
-
 function mouseReleased() {
   clicked = false;
+  background(0);
 }
-
-// Clase Walker con movimiento diagonal
 class Walker {
-  constructor(x, y, direction) {
-    this.x = x;
-    this.y = y;
-    this.direction = direction; // 0,1,2,3 representa cada diagonal
+  constructor(x, y, initialAngle) {
+    this.pos = createVector(x, y);
+    this.baseAngle = initialAngle; // Guardamos dirección base
+    this.dir = p5.Vector.fromAngle(initialAngle);
+    this.t = 0; // Tiempo independiente para cada Walker
   }
 
   step() {
-    // Movimiento diagonal dependiendo de la dirección
-    if (this.direction === 0) {
-      this.x++;
-      this.y++;
-    } else if (this.direction === 1) {
-      this.x--;
-      this.y++;
-    } else if (this.direction === 2) {
-      this.x--;
-      this.y--;
-    } else if (this.direction === 3) {
-      this.x++;
-      this.y--;
+   
+    let variacionAngular = map(noise(this.t), 0, 1, -PI/8, PI/8);
+    let newAngle = this.baseAngle + variacionAngular;
+    this.dir = p5.Vector.fromAngle(newAngle);
+    this.t += 0.01;
+
+    // Avanzar
+    this.pos.add(this.dir);
+
+    // Posibilidad de ramificar (a gusto del que juegue)
+    if (random() < 1 / 400) {
+      this.branch();
     }
   }
-
   show() {
     stroke(255);
-    point(this.x, this.y);
+    point(this.pos.x, this.pos.y);
+  }
+  branch() {
+    let currentAngle = this.dir.heading();
+    let angle1 = currentAngle + radians(45);
+    let angle2 = currentAngle - radians(45);
+
+    walkers.push(new Walker(this.pos.x, this.pos.y, angle1));
+    walkers.push(new Walker(this.pos.x, this.pos.y, angle2));
   }
 }
-
+```
 ### Coloca en enlace a tu sketch en p5.js en tu bitácora.
+[enlace](https://editor.p5js.org/natureofcode/sketches/UGJqLCZb_)
 ### Selecciona una captura de pantalla de tu sketch y colócala en tu bitácora.
+Con variacion angular -PI,PI.
+<img width="851" height="788" alt="image" src="https://github.com/user-attachments/assets/59236f04-f40f-45b1-93f2-83557607cce5" />
+
+Con variacion angular menor para cambios más suaves:
+<img width="863" height="782" alt="image" src="https://github.com/user-attachments/assets/c873cb98-77c8-4204-a64f-451ad1eb7936" />
+
 
