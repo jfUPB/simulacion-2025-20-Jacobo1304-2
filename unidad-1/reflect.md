@@ -38,5 +38,7 @@ Definitivamente el noise, al final para comprenderlo leí la documentación y en
 ### Describe un momento durante el desarrollo de tu obra final (Actividad 08) en el que un “error” o un resultado inesperado te llevó a una idea creativa interesante.
 En el momento de estar modificando valores de ruido para la generación de mis vectores, logré ver que si era de -PI hasta PI el mapeo de esos valores. Se logran bastantes curvas que dan un resultado interesante.
 ### Al combinar diferentes técnicas de aleatoriedad, ¿Cuál fue el mayor desafío? ¿La interacción entre los sistemas, el control de los parámetros, el rendimiento?
-
+El desafío fue en realidad sabe como y en donde implementar cada técnica, y ademas de eso el control del rendimiento. Pues con el levyflight y mi sistema de ramificación no controlaba la eliminacion de ramas y despues de un rato petaba.
 ### Si tuvieras que empezar la Actividad 08 de nuevo, ¿Qué harías de manera diferente basándote en lo que sabes ahora?
+Controlar el rendimiento, aplicar el noise de manera correcta. Y simplemente evitar cambios tan bruscos.
+
