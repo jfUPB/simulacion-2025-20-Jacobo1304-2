@@ -75,6 +75,39 @@ class Walker {
 }
 
 ```
+Añadimos luego una modificacion para que el punto no se mueva siempre con el mouse y el fondo negro, quedandonos asi
+```js
+let clickX = null;
+let clickY = null;
+let clicked = false;
 
+function setup() {
+  createCanvas(1000, 1000);
+  background(220);
+}
+
+function draw() {
+  background(0);
+
+  if (clicked) {
+    fill(255);
+    noStroke();
+    ellipse(clickX, clickY, 10, 10);
+  }
+}
+
+// Cuando se presiona el mouse
+function mousePressed() {
+  clickX = mouseX;
+  clickY = mouseY;
+  clicked = true;
+}
+
+// Cuando se suelta el mouse
+function mouseReleased() {
+  clicked = false;
+}
+```
 ### Coloca en enlace a tu sketch en p5.js en tu bitácora.
 ### Selecciona una captura de pantalla de tu sketch y colócala en tu bitácora.
+
