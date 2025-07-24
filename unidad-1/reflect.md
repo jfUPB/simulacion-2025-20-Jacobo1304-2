@@ -32,3 +32,11 @@ Uno de los conceptos de aleatoriedad que use fue un Lévy flight, en donde cualq
 ```
 ### ¿Qué es un “paseo” o “caminata” (walk) en el contexto de la simulación? ¿Qué característica particular tiene una caminata de tipo “Lévy flight”?
 Paseo o caminata es una simulación en donde una particula se va moviendo por la pantalla describiendo un camino. Para la que la particula camina se suelen usan valores aleatorios, y se van marcando puntos donde va pasando la particula para registrar como ha caminado. Su dirección puede variar con valores aleatorios uniformes o decantarse hacía algun lado con probabilidades desiguales. El hecho innegable es que un sabio una vez dijo: "Caminante no hay camino, se hace camino al andar..." En el levy flight, simplemente se añade una funcion extra al código en donde con una probabilidad baja, el caminante hace un salto grande para cambiar de posicion, y asi evitar el "oversampling"  (Camino que se sobreEscribe), algo que suele pasar si se deja puramente a la particula andar con los pasos aleatorios.
+### Parte 2
+### ¿Cuál fue el concepto más abstracto o difícil de “visualizar” para ti en esta unidad? ¿Qué hiciste para finalmente comprenderlo?
+Definitivamente el noise, al final para comprenderlo leí la documentación y entendí que era una función interna del programa, y que se le pasaba un parametro de tiempo, que se iba aumentando, para lograr esa variación con respecto al tiempo.
+### Describe un momento durante el desarrollo de tu obra final (Actividad 08) en el que un “error” o un resultado inesperado te llevó a una idea creativa interesante.
+En el momento de estar modificando valores de ruido para la generación de mis vectores, logré ver que si era de -PI hasta PI el mapeo de esos valores. Se logran bastantes curvas que dan un resultado interesante.
+### Al combinar diferentes técnicas de aleatoriedad, ¿Cuál fue el mayor desafío? ¿La interacción entre los sistemas, el control de los parámetros, el rendimiento?
+
+### Si tuvieras que empezar la Actividad 08 de nuevo, ¿Qué harías de manera diferente basándote en lo que sabes ahora?
