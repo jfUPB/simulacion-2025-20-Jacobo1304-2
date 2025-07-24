@@ -108,6 +108,78 @@ function mouseReleased() {
   clicked = false;
 }
 ```
+let clickX = null;
+let clickY = null;
+let clicked = false;
+let walkers = [];
+
+function setup() {
+  createCanvas(1000, 1000);
+  background(0);
+}
+
+function draw() {
+  // Solo dibuja cuando hay walkers activos
+  if (clicked) {
+    fill(255);
+    noStroke();
+    ellipse(clickX, clickY, 10, 10);
+
+    // Mostrar y mover cada walker
+    for (let w of walkers) {
+      w.step();
+      w.show();
+    }
+  }
+}
+
+function mousePressed() {
+  clickX = mouseX;
+  clickY = mouseY;
+  clicked = true;
+
+  // Crea 4 walkers diagonales
+  walkers = [];
+  for (let i = 0; i < 4; i++) {
+    walkers.push(new Walker(clickX, clickY, i));
+  }
+}
+
+function mouseReleased() {
+  clicked = false;
+}
+
+// Clase Walker con movimiento diagonal
+class Walker {
+  constructor(x, y, direction) {
+    this.x = x;
+    this.y = y;
+    this.direction = direction; // 0,1,2,3 representa cada diagonal
+  }
+
+  step() {
+    // Movimiento diagonal dependiendo de la dirección
+    if (this.direction === 0) {
+      this.x++;
+      this.y++;
+    } else if (this.direction === 1) {
+      this.x--;
+      this.y++;
+    } else if (this.direction === 2) {
+      this.x--;
+      this.y--;
+    } else if (this.direction === 3) {
+      this.x++;
+      this.y--;
+    }
+  }
+
+  show() {
+    stroke(255);
+    point(this.x, this.y);
+  }
+}
+
 ### Coloca en enlace a tu sketch en p5.js en tu bitácora.
 ### Selecciona una captura de pantalla de tu sketch y colócala en tu bitácora.
 
