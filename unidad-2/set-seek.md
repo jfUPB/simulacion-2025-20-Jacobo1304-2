@@ -125,3 +125,67 @@ La orientación es un vector perpendicular al plano formado por ambos vectores, 
 Pra conocer la distancia entre 2 puntos, o un punto y el origen, y asi poner condiciones o hacer que el programa reacciones a ello.
 ¿Para qué sirven los métodos normalize() y limit()?
 Limit nos sirve para hacer que la magnitud no sobre pase de un punto en especifico, y serviría para controlar esa parte. Normalize, como se dijo anteriormente hace la magnitud 1. Esto podría mantener la magnitud igual cuando se necesite.
+
+### Actividad 5
+Primero intenté hacerlo un poco machetero, tardando 40 minutos en sacar esta solución para nada escalable:
+<img width="1369" height="731" alt="image" src="https://github.com/user-attachments/assets/2a9a7666-34f0-4fad-8484-f2595ec2ed43" />
+Después de revisar en la documentación y batallar con mi cerebro para entender la resta de 2 vectores, se logró y este fue el código final:
+```js
+let t = 0.1;
+let tDirection = 1;
+function setup() {
+    createCanvas(350, 350);
+   
+   
+}
+
+
+function draw() {
+    background(200);
+  
+    let v0 = createVector(width/2, height/2);
+    let v1 = createVector(100, 0);
+    let v2 = createVector(0, 100);
+    
+    let v4 = p5.Vector.sub(v2,v1); 
+    
+  
+    t += 0.01 * tDirection;
+
+  if (t >= 1) {
+    t = 1;
+    tDirection = -1;
+  } else if (t <= 0) {
+    t = 0;
+    tDirection = 1;
+  }
+    let v3 = p5.Vector.lerp(v1, v2, t);
+  
+  let colorMedio =  lerpColor('red', 'blue', t);
+ 
+    drawArrow(v0, v1, 'red');
+    drawArrow(v0, v2, 'blue');
+    drawArrow(v0, v3, colorMedio);
+    drawArrow(p5.Vector.add(v0,v1),v4,'green');
+}
+
+function drawArrow(base, vec, myColor) {
+    push();
+    stroke(myColor);
+    strokeWeight(3);
+    fill(myColor);
+    translate(base.x, base.y);
+    line(0, 0, vec.x, vec.y);
+  
+    rotate(vec.heading());
+    let arrowSize = 7;
+    translate(vec.mag() - arrowSize, 0);
+    triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+    pop();
+}
+```
+#### ¿Cómo funciona lerp() y lerpColor().
+Son funciones de interpolación, que reciben un parametro especial que les indica cuanto va cambiando segun una cosa en la otra, en el caso de ambas cosas en nuestro código los 2 párametros son los mismos (t)
+
+#### ¿Cómo se dibuja una flecha usando drawArrow()?
+Se le pasa una base, un vector de dirección y un color, y ya con eso se hace una linea del color que es y luego dibuja un triangulo al final. Usa push y pop para hacerlo solo 1 vez y no estallar el rendimiento.
