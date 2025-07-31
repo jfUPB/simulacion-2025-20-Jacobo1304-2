@@ -89,7 +89,20 @@ Un draw que solo salga una vez, y la modificación de un vector, en donde por co
 Lo mismo de arriba, se logra ver en consola como cambian los valores al mantener una referencia directa y modificar el original. Mientras que cuando se crea una copia, y se modifica la misma, no genera cambios en el vector original.
 Recuerda los conceptos de paso por valor y paso por referencia en programación. Muestra ejemplos de este concepto en javascript.
 Un buen ejemplo de paso por referencia es el siguiente.
+```js
+ position = createVector(6,9);
+    console.log(position.toString());
+    playingVector(position);
+    console.log(position.toString());
+    noLoop();
+}
 
+function playingVector(v){
+    v.x = 20;
+    v
+```
+En donde estamos pasando una referencia de memoria de la variable position. Y estamos modificando la misma con la función playingVector. Como tanto v como position apuntan al mismo objeto, el cambio se refleja afuera. Es decir, pasó por referencia.
+Una forma de pasarlo por valor es con la función copy. 
 ¿Qué tipo de paso se está realizando en el código?
 En este código se realiza un paso por referencia, en donde la función recibe como parametro la referencia del objeto en meoria, y modifica el objeto desde ahi.
 ¿Qué aprendiste?
@@ -103,7 +116,7 @@ Normalize nos ayuda a escalar los componentes del vector para que su magnitud se
 Te encuentras con un periodista en la calle y te pregunta ¿Para qué sirve el método dot()? ¿Qué le responderías en un frase?
 Para determinar si dos vectores son perpendiculares entre si señor periodista.
 El método dot() tiene una versión estática y una de instancia. ¿Cuál es la diferencia entre ambas?
-La versión estática del método dot, crea una copia del objeto, y almacena el escalar resultante en una nueva variable normalmente.
+La versión estática del método dot, crea una copia del objeto, y almacena el escalar resultante en una nueva variable normalmente. sería equivalente a vcetor.dot(v1,v2)
 
 Ahora el mismo periodista curioso de antes te pregunta si le puedes dar una intuición geométrica acerca del producto cruz. Entonces te pregunta ¿Cuál es la interpretación geométrica del producto cruz de dos vectores? Tu 
 respuesta debe incluir qué pasa con la orientación y la magnitud del vector resultante.
