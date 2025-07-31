@@ -130,6 +130,8 @@ Limit nos sirve para hacer que la magnitud no sobre pase de un punto en especifi
 Primero intenté hacerlo un poco machetero, tardando 40 minutos en sacar esta solución para nada escalable:
 <img width="1369" height="731" alt="image" src="https://github.com/user-attachments/assets/2a9a7666-34f0-4fad-8484-f2595ec2ed43" />
 Después de revisar en la documentación y batallar con mi cerebro para entender la resta de 2 vectores, se logró y este fue el código final:
+<img width="260" height="237" alt="image" src="https://github.com/user-attachments/assets/3d2c8c14-3af4-41b3-8171-4641a63eedac" />
+
 ```js
 let t = 0.1;
 let tDirection = 1;
