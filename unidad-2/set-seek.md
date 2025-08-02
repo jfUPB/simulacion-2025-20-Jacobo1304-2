@@ -191,3 +191,96 @@ Son funciones de interpolación, que reciben un parametro especial que les indic
 
 #### ¿Cómo se dibuja una flecha usando drawArrow()?
 Se le pasa una base, un vector de dirección y un color, y ya con eso se hace una linea del color que es y luego dibuja un triangulo al final. Usa push y pop para hacerlo solo 1 vez y no estallar el rendimiento.
+
+### Actividad 6
+#### Cuál es el concepto del marco motion 101 y cómo se interpreta geométricamente.
+Motion 101 es una manera muy simple de generar movimiento y con poco trabajo hacerlo ver orgánico. Geometricamente simplemente se basa en ir añadiento unos vectores a otros, en este caso, la posicion, la velocidad, y la aceleración. Al sumar la velocidad a la posicion se genera el movimiento frame a frame.
+#### ¿Cómo se aplica motion 101 en el ejemplo?
+En el ejemplo, no hay aceleración, pero hay una clase Mover, en donde se hace la suma de vectores posición con velocidad, y luego en el metodo show se dibuja el circulo en la nueva posición resultante del vector. También hay un método checkedges para que vuelva a la posicion inicial de ancho o altura cuando llega al limite.
+### Actividad 7
+#### Aceleracion constante
+Con la aceleración constante se hace un efecto realista en donde cada vez que rebota va reducioendo y rebotando, y cae como si fuera una bola de ping pong.
+```js
+class Mover {
+  constructor() {
+    this.position = createVector(random(width), random(height));
+    this.velocity = createVector(random(-2, 2), random(-2, 2));
+    this.acceleration = createVector(2,2) ;
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+  }
+
+   
+  
+  show() {
+    stroke(0);
+    strokeWeight(2);
+    fill(127);
+    circle(this.position.x, this.position.y, 48);
+  }
+
+ checkEdges() {
+  if (this.position.x > width || this.position.x < 0) {
+    this.velocity.x *= -1; 
+  }
+
+  if (this.position.y > height || this.position.y < 0) {
+    this.velocity.y *= -1; 
+  }
+
+  // Opcional: asegúrate de que el objeto no se quede fuera del canvas
+  this.position.x = constrain(this.position.x, 0, width);
+  this.position.y = constrain(this.position.y, 0, height);
+}
+
+}
+```
+#### Aceleracion Random
+Aqui la bola se volvia bastante loca, ademas de tener una acelarion random va cambiandola cada 5 rebotes para que no se quede con la misma.
+```js
+let accelerationCount = 0;
+
+class Mover {
+  constructor() {
+    this.position = createVector(random(width), random(height));
+    this.velocity = createVector(random(-2, 2), random(-2, 2));
+    this.acceleration = createVector(random(-20,20), random (-20,20));
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+  }
+  changeAcceleration(){
+    if(accelerationCount ==5){
+       this.acceleration = createVector(random(-20,20), random (-20,20));
+      accelerationCount = 0;
+    }
+   
+  }
+  show() {
+    stroke(0);
+    strokeWeight(2);
+    fill(127);
+    circle(this.position.x, this.position.y, 48);
+  }
+
+ checkEdges() {
+  if (this.position.x > width || this.position.x < 0) {
+    this.velocity.x *= -1; accelerationCount++;
+  }
+
+  if (this.position.y > height || this.position.y < 0) {
+    this.velocity.y *= -1; accelerationCount++;
+  }
+
+  // Opcional: asegúrate de que el objeto no se quede fuera del canvas
+  this.position.x = constrain(this.position.x, 0, width);
+  this.position.y = constrain(this.position.y, 0, height);
+```
+#### Aceleracion hacia el mouse
+Este ultimo da un efecto de orbitar. Se limita la velocidad en 5 porque si no, puede generar efectos un poco menos orgánicos.
+<img width="1703" height="759" alt="{9957360C-A44D-4D37-9494-62B878DD76D3}" src="https://github.com/user-attachments/assets/ccb482e3-12c3-46a5-b9d2-2737343efadf" />
