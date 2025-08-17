@@ -311,4 +311,7 @@ class Liquid {
 }
 ```
 ### Captura una imagen representativa de tu ejemplo.
+Resistencia y drag:
+<img width="809" height="324" alt="{66CFCC64-2B0E-42D1-B3CD-D65ABFBF52C6}" src="https://github.com/user-attachments/assets/fee5abc9-b8f7-408c-85d0-e1684ae87555" />
+
 
