@@ -11,8 +11,12 @@
 Para la fricción lo mantuve simple y experimenté con 2 cosas:
 El coeficiente de fricción
 El multiplicador -1 (completo fracaso pero aprendí, pues se puede multiplicar por -200 y no pasa nada, se normaliza.) 
-El coeficiente de fricción lo hice interactivo y fui jugando un poco con esto. Para ya des
+El coeficiente de fricción lo hice interactivo y fui jugando un poco con esto. Para ya después quitarle el negativo y volverlo positivo, algo que si afectaba, pues en vez de reducir, aumentaba la fuerza.
+Para el drag o resistencia de liquidos y aire experimente con el area de los objetos: 
+Cambie el objeto a rectangulos, e inclui un area en cada uno para comparar sus bajadas según su área.
 ### Conceptualmente cómo se relaciona la fuerza con la obra generativa.
+Conceptualmente en la fricción, nos permite afectar directamente el "material" del suelo, pudiendo simular algo como el hielo o un suelo de madera, solo con el scroll. También nos permite salirnos de la realidad con el enter.
+En la resistencia del aire, nos permite ver como diferente tamaño en cajas afectan su caida a un liquido como el agua, o si se quiere algo más viscoso como la miel.
 ### Copia el enlace a tu ejemplo en p5.js.
 ### Copia el código.
 #### Para fricción:
@@ -88,6 +92,7 @@ function keyReleased() {
   }
 }
 ```
+Aqui el mover:
 ```js
 // The Nature of Code
 // Daniel Shiffman
@@ -144,4 +149,166 @@ class Mover {
 
 }
 ```
+Para fluidos:
+Sketch
+```js
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+// Un solo Mover en el centro con fuerzas (gravedad + resistencia de fluido)
+
+let mover;   // un solo objeto
+let liquid;  // el fluido
+
+function setup() {
+  createCanvas(640, 240);
+
+  // Crear el mover en el centro
+  mover = new Mover(width / 2, 50, 2, random(100,200));
+
+  // Crear liquid en la mitad inferior
+  liquid = new Liquid(0, height / 2, width, height / 2, 0.1);
+}
+
+function draw() {
+  background(255);
+
+  // Dibujar el fluido
+  liquid.show();
+
+  // ¿El mover está dentro del líquido?
+  if (liquid.contains(mover)) {
+    // Calcular y aplicar fuerza de arrastre
+    let dragForce = liquid.calculateDrag(mover);
+    mover.applyForce(dragForce);
+  }
+
+  // Fuerza de gravedad proporcional a la masa
+  let gravity = createVector(0, 0.1 * mover.mass);
+  mover.applyForce(gravity);
+
+  // Actualizar y dibujar
+  mover.update();
+  mover.show();
+  mover.checkEdges();
+}
+
+function mousePressed() {
+  // Reiniciar el mover en el centro
+  mover = new Mover(width / 2, 50, 2, random(20,200));
+}
+```
+Mover:
+```js
+class Mover {
+  constructor(x, y, mass, area) {
+    this.mass = mass;
+
+    this.width = random(area * 0.1, area * 1.0);
+    this.height = 50;
+
+    this.area = this.width * this.height; // área frontal simple
+
+    this.position = createVector(x, y);
+    this.velocity = createVector(0, 0);
+    this.acceleration = createVector(0, 0);
+  }
+
+  applyForce(force) {
+    let f = p5.Vector.div(force, this.mass);
+    this.acceleration.add(f);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.mult(0);
+  }
+
+  show() {
+    stroke(0);
+    strokeWeight(2);
+    fill(127, 127);
+
+    
+    rect(this.position.x, this.position.y, this.width, this.height);
+  }
+
+  checkEdges() {
+    // Suelo
+    if (this.position.y > height - this.height / 2) {
+      this.velocity.y *= -0.9;
+      this.position.y = height - this.height / 2;
+    }
+
+    // Techo
+    if (this.position.y < this.height / 2) {
+      this.velocity.y *= -0.9;
+      this.position.y = this.height / 2;
+    }
+
+    // Bordes laterales
+    if (this.position.x > width - this.width / 2) {
+      this.velocity.x *= -0.9;
+      this.position.x = width - this.width / 2;
+    }
+    if (this.position.x < this.width / 2) {
+      this.velocity.x *= -0.9;
+      this.position.x = this.width / 2;
+    }
+  }
+}
+
+```
+Liquid:
+```js
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+class Liquid {
+  constructor(x, y, w, h, c) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.c = c;
+  }
+
+  // Is the Mover in the Liquid?
+  contains(mover) {
+    let pos = mover.position;
+    return (
+      pos.x > this.x &&
+      pos.x < this.x + this.w &&
+      pos.y > this.y &&
+      pos.y < this.y + this.h
+    );
+  }
+
+  // Calculate drag force.,
+  calculateDrag(mover) {
+  let speedSq = mover.velocity.magSq();
+
+  // Área efectiva del mover (ejemplo: su ancho)
+  let surfaceArea = mover.area * 0.0005;
+
+  let dragMagnitude = this.c * speedSq * surfaceArea;
+
+  let dragForce = mover.velocity.copy();
+  dragForce.mult(-1);
+  dragForce.setMag(dragMagnitude);
+
+  return dragForce;
+}
+
+  show() {
+    noStroke();
+    fill(220);
+    rect(this.x, this.y, this.w, this.h);
+  }
+}
+```
 ### Captura una imagen representativa de tu ejemplo.
+
