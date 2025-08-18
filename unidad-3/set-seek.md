@@ -473,8 +473,10 @@ class Attractor extends Mover {
 
 #### Resistencia y drag:
 <img width="809" height="324" alt="{66CFCC64-2B0E-42D1-B3CD-D65ABFBF52C6}" src="https://github.com/user-attachments/assets/fee5abc9-b8f7-408c-85d0-e1684ae87555" />
+
 #### Gravitación:
 <img width="849" height="442" alt="{E397650E-FE58-4575-939C-5FC87485F1B8}" src="https://github.com/user-attachments/assets/6e55cf2d-e130-48a0-9c42-8414d764843c" />
+
 
 
 
