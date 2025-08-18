@@ -310,8 +310,172 @@ class Liquid {
   }
 }
 ```
+#### Para la gravitación:
+Sketch
+```js
+let movers = [];
+let attractor;
+let G = 10;
+
+function setup() {
+  createCanvas(640, 320);
+
+  // Creamos un primer mover
+  movers.push(new Mover(width / 2, 50, 5, 200,randomColor()));
+
+  // Creamos el attractor (puede ser una clase distinta o un Mover especial)
+  attractor = new Attractor(width / 2, height / 2, 5);
+}
+
+function draw() {
+  background(0, 5);
+
+  // Recorremos todos los movers
+  for (let m of movers) {
+    // Fuerza de atracción desde el attractor
+    let force = attractor.attract(m);
+    m.applyForce(force);
+
+    // Actualizamos y mostramos cada mover
+    m.update();
+    m.checkEdges();
+    m.show();
+  }
+
+  // Aplicamos fuerzas al attractor (si quieres que también se mueva)
+  let gravity = createVector(0, 0.1);
+  attractor.applyForce(gravity);
+
+  if (mouseIsPressed) {
+    let wind = createVector(0.5, 0);
+    attractor.applyForce(wind);
+  }
+
+  // Actualizamos y mostramos el attractor solo una vez
+  attractor.update();
+  attractor.checkEdges();
+  attractor.show();
+}
+
+// Agregar más movers con la barra espaciadora
+function keyPressed() {
+  if (key === ' ') {
+    movers.push(new Mover(random(width), 50, random(2, 8), random(50, 200), randomColor()));
+  }
+}
+function randomColor() {
+  return color(random(0,255), random(0,255), random(0,255));
+}
+
+```
+Mover
+```js
+class Mover {
+  constructor(x, y, mass, c) {
+    this.mass = mass;
+    this.radius = mass * 8;
+    this.position = createVector(x, y);
+    this.velocity = createVector(0, 0);
+    this.c = c
+    this.acceleration = createVector(0, 0);
+  }
+  
+  applyForce(force) {
+    let f = p5.Vector.div(force, this.mass);
+    this.acceleration.add(f);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.mult(0);
+  }
+
+  show() {
+    stroke(255);
+    strokeWeight(3);
+    fill(this.c);
+    circle(this.position.x, this.position.y, this.radius * 2);
+  }
+   checkEdges() {
+    if (this.position.x > width) {
+      this.position.x = width;
+      this.velocity.x *= -1;
+    } else if (this.position.x < 0) {
+      this.velocity.x *= -1;
+      this.position.x = 0;
+    }
+    if (this.position.y > height) {
+      this.velocity.y *= -1;
+      this.position.y = height;
+    }
+     else if (this.position.y<0){
+       this.velocity.y *=-1
+       this.position.y = 0;
+     }
+  }
+}
+```
+Attractor
+```js
+// Attractor ahora es un Mover
+class Attractor extends Mover {
+  constructor(x, y, mass) {
+    super(x, y, mass); // hereda de Mover
+    this.dragOffset = createVector(0, 0);
+    this.dragging = false;
+    this.rollover = false;
+  }
+
+  attract(mover) {
+    let force = p5.Vector.sub(this.position, mover.position);
+    let distanceSq = force.magSq();
+    distanceSq = constrain(distanceSq, 25, 500); // límites ajustados
+    let strength = (G * this.mass * mover.mass) / distanceSq;
+    force.setMag(strength);
+    return force;
+  }
+
+  show() {
+    strokeWeight(4);
+    stroke(255,200,0);
+    fill(255, 255,0 );
+    circle(this.position.x, this.position.y, this.radius * 2);
+  }
+
+  // Métodos de interacción con mouse
+  handlePress(mx, my) {
+    let d = dist(mx, my, this.position.x, this.position.y);
+    if (d < this.radius) {
+      this.dragging = true;
+      this.dragOffset.x = this.position.x - mx;
+      this.dragOffset.y = this.position.y - my;
+    }
+  }
+
+  handleDrag(mx, my) {
+    if (this.dragging) {
+      this.position.x = mx + this.dragOffset.x;
+      this.position.y = my + this.dragOffset.y;
+    }
+  }
+
+  stopDragging() {
+    this.dragging = false;
+  }
+}
+
+```
+
 ### Captura una imagen representativa de tu ejemplo.
-Resistencia y drag:
+#### Fricción:
+<img width="1584" height="748" alt="{CA35B09C-CD43-4425-A1AA-50487C3EF405}" src="https://github.com/user-attachments/assets/1f359d31-3fff-47aa-a0ab-277aa199e5d6" />
+
+#### Resistencia y drag:
 <img width="809" height="324" alt="{66CFCC64-2B0E-42D1-B3CD-D65ABFBF52C6}" src="https://github.com/user-attachments/assets/fee5abc9-b8f7-408c-85d0-e1684ae87555" />
+#### Gravitación:
+<img width="849" height="442" alt="{E397650E-FE58-4575-939C-5FC87485F1B8}" src="https://github.com/user-attachments/assets/6e55cf2d-e130-48a0-9c42-8414d764843c" />
+
+
 
 
