@@ -4,7 +4,7 @@
 #### Concepto: 
 Obra generativa interactiva en tiempo real
 
-Mi obra generativa consiste en un sistema de atracción gravitacional de N-cuerpos, inspirado en The Nature of Code, pero reinterpretado en clave artística. En lugar de partículas simples, cada cuerpo se representa como una hoja generativa orgánica dibujada con noise, lo que aporta una estética natural y viva.
+Mi obra generativa consiste en un sistema de atracción gravitacional de N-cuerpos, inspirado en The Nature of Code, pero reinterpretado en clave artística. En lugar de partículas simples como circulos, busque formas inspiradas en Daniel Kalder, cada cuerpo se representa como una hoja generativa orgánica dibujada con noise, lo que aporta una estética natural y viva.
 
 #### Interactividad
 
@@ -184,6 +184,7 @@ function addMover() {
 ```
 ### Captura de la obra:
 <img width="1121" height="893" alt="image" src="https://github.com/user-attachments/assets/954953bc-f503-4d0f-a5a9-df42eed1b741" />
+
 
 
 
