@@ -86,7 +86,7 @@ class Mover {
   }
 }
 ```
-
+#### Sketch:
 ```js
 let movers = [];
 let sun;
@@ -149,4 +149,5 @@ function addMover() {
 ```
 ### Captura de la obra:
 <img width="1121" height="893" alt="image" src="https://github.com/user-attachments/assets/954953bc-f503-4d0f-a5a9-df42eed1b741" />
+
 
