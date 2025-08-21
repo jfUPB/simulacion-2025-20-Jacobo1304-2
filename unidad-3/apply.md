@@ -1,8 +1,43 @@
 # Unidad 3
 
-
 ## 🛠 Fase: Apply
-#### Concepto: La hojas orbitando
+#### Concepto: 
+Obra generativa interactiva en tiempo real
+
+Mi obra generativa consiste en un sistema de atracción gravitacional de N-cuerpos, inspirado en The Nature of Code, pero reinterpretado en clave artística. En lugar de partículas simples, cada cuerpo se representa como una hoja generativa orgánica dibujada con noise, lo que aporta una estética natural y viva.
+
+#### Interactividad
+
+Con la tecla ESPACIO se agregan nuevas hojas al sistema.
+
+Con la tecla D se eliminan hojas.
+
+Las hojas rotan dinámicamente y se colorean aleatoriamente en rojo, amarillo o azul.
+
+Con una baja probabilidad ocurre un Lévy flight, en cuyo caso la hoja se dibuja de color morado, diferenciándose del resto.
+
+#### Algoritmos de la unidad 1 utilizados
+
+Perlin Noise: Se usa para deformar el contorno de cada hoja y darle una forma orgánica, no rígida.
+
+Además, utilizo random tanto para la asignación de colores como para inicializar posiciones, masas y velocidades.
+
+Como extra, implemento la idea de Lévy flight para introducir rarezas en el sistema (hojas moradas), aunque la verdad no se vieron como esperaba, pues solo se ve un destello morado y en seguida vuelve a ser amarilla.
+
+#### Modelado del problema de los N-cuerpos
+
+Cada hoja es un objeto de la clase Mover, con propiedades de posición, velocidad, aceleración y masa.
+
+La atracción se modela usando la ley de gravitación universal simplificada que aparece en el libro.
+	​
+Cada Mover aplica fuerzas sobre los demás, generando trayectorias emergentes y caóticas.
+
+La simulación se ejecuta en tiempo real y se visualiza a través de la animación de las hojas.
+
+#### Enlace a la simulación en p5.js
+https://editor.p5js.org/Jacobo1304-2/sketches/pXI4fdV_t
+
+👉 Enlace a mi simulación (editor.p5js.org)
 ```js
 class Mover {
   constructor(x, y, vx, vy, m) {
@@ -149,5 +184,6 @@ function addMover() {
 ```
 ### Captura de la obra:
 <img width="1121" height="893" alt="image" src="https://github.com/user-attachments/assets/954953bc-f503-4d0f-a5a9-df42eed1b741" />
+
 
 
