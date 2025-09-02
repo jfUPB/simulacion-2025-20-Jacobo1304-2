@@ -24,7 +24,7 @@
 
 ## Enlace a la obra en el editor de p5.js
 
-[Aquí está mi obra]((https://editor.p5js.org/Jacobo1304-2/sketches/oj5N8vqOV))
+[Aquí está mi obra](https://editor.p5js.org/Jacobo1304-2/sketches/oj5N8vqOV)
 
 ## Código de la obra 
 
@@ -396,6 +396,7 @@ class Destello {
 
 ## Captura de pantalla representativa
 <img width="706" height="315" alt="image" src="https://github.com/user-attachments/assets/8291de8f-792d-4bff-ad70-e81e9d7b8ba8" />
+
 
 
 
