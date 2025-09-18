@@ -15,6 +15,11 @@ Para la unidad 1, random noise y lerp. Para la unidad 2, el marco de motion101, 
 
 Se descartaron varias ideas del boceto como que va creciendo, o variar el numero de particulas. Pues al ver lo cool que se vean las particulas en un hexagono. Decidi seguir ese camino y replicar algo asi como un ritual.
 
+### Imagenes
+<img width="1376" height="1189" alt="image" src="https://github.com/user-attachments/assets/cb589a37-9195-4c76-a7be-6371f4c5f7ea" />
+<img width="789" height="287" alt="image" src="https://github.com/user-attachments/assets/9560f5ed-596d-4889-ac68-8b91d0139894" />
+
+
 ### Sketch
 // The Nature of Code
 // Daniel Shiffman
@@ -621,5 +626,6 @@ class Emitter {
 
   </body>
 </html>
+
 
 
