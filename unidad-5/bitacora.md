@@ -609,14 +609,45 @@ function mouseWheel(event) {
 ```
 Aqui controlamos lo anterior con la ruedita del mouse.
 
-#### Cémo gestionan todos estos ejemplos el rendimiento y espacio? para qué nos sirve esto?
+#### Cómo gestionan todos estos ejemplos el rendimiento y espacio? para qué nos sirve esto?
+
+Los sistemas de partículas revisados gestionan el rendimiento principalmente con:
+
+- **Ciclo de vida (`lifespan`)** → cada partícula tiene un tiempo limitado que se va reduciendo en cada frame.  
+- **Chequeo con `isDead()`** → determina cuándo una partícula debe ser eliminada.  
+- **Eliminación con `splice` recorriendo de atrás hacia adelante** → evita errores de índice y mantiene rendimiento aceptable.
+
+### ¿Por qué es importante?
+- Mantiene un **número controlado de partículas activas**.  
+- Evita saturar el **garbage collector** con objetos que ya no se usan.  
+- Asegura un **renderizado fluido** incluso con cientos o miles de partículas.
+
+### Alternativas más eficientes
+- **Object Pooling** → reciclar partículas en lugar de destruir y crear nuevas.  
+- **Swap + Pop** → intercambiar la partícula muerta con la última del array y eliminarla con `pop()` (O(1) en lugar de O(n)).  
+- **Eliminación por batch** → marcar partículas muertas y borrarlas cada cierto tiempo.  
+
+---
+✅ En resumen: el `lifespan` y `isDead()` son la base para controlar memoria y rendimiento; `splice` funciona bien en sistemas pequeños, pero en simulaciones grandes es mejor usar **pooling** o **swap + pop**.
 #### Rubrica
 <img width="1438" height="858" alt="image" src="https://github.com/user-attachments/assets/f5673dbb-9800-4a11-8c97-4d9ac673c13c" />
 
 
 #### Autoevaluación
 
+1. **Investigación y Experimentación (Evidencia en Actividad 2)**
+   - Considero que logré un nivel excelente porque no solo implementé las modificaciones solicitadas, sino que también entendí la interrelación entre los componentes del código. Pude justificar la elección de las técnicas aplicadas y cómo estas se conectan entre sí para lograr el resultado esperado. La experimentación fue intencionada y siempre con un objetivo claro de aprendizaje.
 
+2. **Intención y Diseño (Proceso de Actividad 3)**
+   - La bitácora incluye un concepto definido acompañado de artefactos de diseño (diagramas, bocetos y explicaciones). Cada elemento principal de la obra se vincula directamente con decisiones tomadas durante el proceso. El diseño se reflejó en la obra final de forma coherente, mostrando una implementación clara de lo planeado. A pesar de que hubieron algunos cambios y decisiones de última hora con respecto al boceto, se mantuvo coherente a las bases y conceptos escogidos.
+
+3. **Aplicación Técnica (Código de Actividad 3)**
+   - El código está organizado en clases modulares que encapsulan datos y comportamientos, lo que permite mayor legibilidad y reutilización. Utilicé herencia y composición para diferenciar comportamientos, y documenté claramente cada parte del proceso. El manejo de memoria y arrays se optimizó para mantener un rendimiento estable, en este caso con el splice que ya usaba shiffman en su libro, y el bool isDead(), mostrando un entendimiento de la técnica, además de que logré explorar de nuevo cosas como p5.sound y la rotación de la unidad 4, cosas bastante útiles.
+
+4. **Calidad de la Obra Final (Artefacto Entregado)**
+   - La obra final es estable, con un frame rate constante y respuesta interactiva clara. No se limita solo a “funcionar”, sino que además incorpora detalle en la respuesta visual, generando una experiencia amplia y variada. La interacción se mantiene coherente con el concepto planteado (los 6 elementos), evitando errores visuales y garantizando consistencia en la ejecución.
+
+Nota final: 5
 
 
 
