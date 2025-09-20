@@ -295,6 +295,7 @@ class Emitter {
 
 #### Analiza el [ejemplo 4.4: a System of Systems](https://editor.p5js.org/natureofcode/sketches/-xTbGZMim).
 <img width="873" height="325" alt="image" src="https://github.com/user-attachments/assets/93e3132e-6b10-45f4-b24d-e155bbdd3abc" />
+
 #### Que hice?
 Apliqué el concepto de aplicar fuerza de la unidad 2, a pesar de que ahi ya se aplicaba, en la clase particula y su gravedad. Decidí repasarlo agregandole un viento a las particulas cada vez que se da click, dandole una fuerza horizontal a las particulas.
 #### Como lo hice?
@@ -307,8 +308,8 @@ function mousePressed() {
   }
 }
 ```
-[!WARNING]
-Problema.
+ ⚠️ **Pequeño problema**
+ con el código de arriba.
 Solo sucede en un click, si se queda presionado no funciona. Asi que mejor añadi esto en el bucle draw y se soluciono el problema:
 ```js
  if (mouseIsPressed){
@@ -318,6 +319,79 @@ Solo sucede en un click, si se queda presionado no funciona. Asi que mejor añad
   }
   }
 ```
+#### Analiza el [ejemplo 4.4: a System of Systems.](https://editor.p5js.org/natureofcode/sketches/s_Y3-Mmo7)
+<img width="880" height="331" alt="image" src="https://github.com/user-attachments/assets/a9578608-4d09-4ac4-87c4-432f86de712c" />
+#### Que hice?
+Aplique el concepto de walker de la unidad 1 a los emitters que se creaban en el ejemplo, en este caso los walkers tenian un sesgo vertical. Lo hice para repasar la parte de las aleatoriedades recargadas y ver como un walker podia mover un sistema de particulas completo.
+#### Como lo hice?
+Simplemente cambie un poco el aspecto del fondo en sketch (negro), de la particula en particle (blanca). Y el walker importante se encuentra en la clase emitter.
+```js
+class Emitter {
+  constructor(x, y) {
+    this.origin = createVector(x, y);
+    this.particles = [];
+    this.trail = []; // ⬅️ aquí guardamos las posiciones previas
+    this.maxTrail = 240; // ⬅️ largo máximo del trail
+  }
+
+  addParticle() {
+    this.particles.push(new Particle(this.origin.x, this.origin.y));
+  }
+
+  run() {
+    this.updateWalker();
+    this.showWalker();
+
+    // Partículas
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      this.particles[i].run();
+      if (this.particles[i].isDead()) {
+        this.particles.splice(i, 1);
+      }
+    }
+  }
+
+  updateWalker() {
+    let stepX = floor(random(-1, 2)); // -1, 0, 1
+    let stepY;
+
+    if (this.origin.y < height / 2) {
+      stepY = random() < 0.7 ? 1 : -1;
+    } else {
+      stepY = random() < 0.7 ? -1 : 1;
+    }
+
+    this.origin.x += stepX;
+    this.origin.y += stepY;
+
+    // Mantener dentro de pantalla
+    this.origin.x = constrain(this.origin.x, 0, width - 1);
+    this.origin.y = constrain(this.origin.y, 0, height - 1);
+
+    // Guardar posición actual en el trail
+    this.trail.push(this.origin.copy());
+    if (this.trail.length > this.maxTrail) {
+      this.trail.shift(); // eliminar la más vieja
+    }
+  }
+
+  showWalker() {
+    noFill();
+    stroke(50, 150, 200, 150);
+    beginShape();
+    for (let pos of this.trail) {
+      vertex(pos.x, pos.y);
+    }
+    endShape();
+
+    // Dibujar el punto actual encima
+    noStroke();
+    fill(150, 150, 200, 255);
+    circle(this.origin.x, this.origin.y, 10);
+  }
+}
+```
+Aqui utilizamos el metodo de walker, en donde con unos random, favorece en un 70% a ir hacia abajo si esta de la mitad para arriba de la pantalla, y visceversa. Luego, avanzamos el origen en x y en Y  mostramos un pequeño trail para mostrar donde va. Utilizando shift si se supera el maxtrail, manteniendo rendimiento 🏎️.
 
 #### Analiza el ejemplo 4.5: a Particle System with Inheritance and Polymorphism.
 
@@ -329,6 +403,7 @@ Solo sucede en un click, si se queda presionado no funciona. Asi que mejor añad
 <img width="1438" height="858" alt="image" src="https://github.com/user-attachments/assets/f5673dbb-9800-4a11-8c97-4d9ac673c13c" />
 
 #### Autoevaluación
+
 
 
 
