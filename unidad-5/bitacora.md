@@ -540,13 +540,82 @@ class Particle {
 
 ```
 
-Este repaso fue máß simple, pero clave para recordar los conceptos del noise y familiarizarme cada vez más con métodos como el "map" algo que no había visto mucho antes de javaScript. Aqui, se le da una semilla única a cada particula con ese random entre 1000, y luego en show, se calcula el noise con el metodo noise, el offset, y el conteo de frames, para luego pasar eso a los valores RGB con el metodo map, y luego dibujar cada particula de manera única. El color por supuesto va cambiando, ya que show se va llamando constantemente en un draw.
-#### Analiza el ejemplo 4.7: a Particle System with a Repeller.
+Este repaso fue más simple, pero clave para recordar los conceptos del noise y familiarizarme cada vez más con métodos como el "map" algo que no había visto mucho antes de javaScript. Aqui, se le da una semilla única a cada particula con ese random entre 1000, y luego en show, se calcula el noise con el metodo noise, el offset, y el conteo de frames, para luego pasar eso a los valores RGB con el metodo map, y luego dibujar cada particula de manera única. El color por supuesto va cambiando, ya que show se va llamando constantemente en un draw.
+#### Analiza el [ejemplo 4.7: a Particle System with a Repeller](https://editor.p5js.org/natureofcode/sketches/H4TMayNak).
 
+<img width="868" height="327" alt="image" src="https://github.com/user-attachments/assets/ed86f7cd-072a-44c2-adeb-0fcde0b29292" />
+
+
+### Que hice?
+Para repasar la unidad 4, meti rotacion angular al repeller, para que pudiera cambiar su posicion respecto al centro, girando su sistema de coordenadas. Esto lo hago porque siento que me servirá para el apply, pues quiero rotar algunas cosas con la rueda del mouse.
+#### Como lo hice?
+Añadi un metodo rotate con cambio en rotacion en el repeller, y luego con un método update position se actualiza la posición de origen, a diferencia de la vez pasada, este es un método diferente al de usar push y pop.
+Simplemente añadimos este codigo a repeller y sketch.
+```js
+class Repeller {
+  constructor(x, y) {
+    this.center = createVector(x, y); // centro de rotación
+    this.radius = 150
+    ;                // distancia al centro
+    this.angle = 0;                   // ángulo inicial
+    this.power = 150;
+    this.updatePosition();
+  }
+
+  updatePosition() {
+    this.position = createVector(
+      this.center.x + this.radius * cos(this.angle),
+      this.center.y + this.radius * sin(this.angle)
+    );
+  }
+
+  rotate(deltaAngle) {
+    this.angle += radians(deltaAngle); // convertimos grados a radianes
+    this.updatePosition();
+  }
+
+  show() {
+    push();
+    stroke(0);
+    strokeWeight(2);
+    fill(127);
+    circle(this.position.x, this.position.y, 32);
+    pop();
+  }
+
+  repel(particle) {
+    let force = p5.Vector.sub(this.position, particle.position);
+    let distance = force.mag();
+    distance = constrain(distance, 5, 50);
+    let strength = (-1 * this.power) / (distance * distance);
+    force.setMag(strength);
+    return force;
+  }
+}
+```
+Con esto logramos una distancia a un centro, y rota angularmente desde ahi, para luego guardar esa posicion. Y en show, con push y pop, dibujar la figura.
+Y cambiamos esto en sketch:
+```js
+
+function mouseWheel(event) {
+  if (event.delta < 0) {
+    // rueda hacia arriba
+    repeller.rotate(10);
+  } else {
+    // rueda hacia abajo
+    repeller.rotate(-10);
+  }
+  return false; // evita el scroll de la página
+```
+Aqui controlamos lo anterior con la ruedita del mouse.
+
+#### Cémo gestionan todos estos ejemplos el rendimiento y espacio? para qué nos sirve esto?
 #### Rubrica
 <img width="1438" height="858" alt="image" src="https://github.com/user-attachments/assets/f5673dbb-9800-4a11-8c97-4d9ac673c13c" />
 
+
 #### Autoevaluación
+
 
 
 
