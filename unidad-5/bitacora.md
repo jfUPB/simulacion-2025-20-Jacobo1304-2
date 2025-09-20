@@ -291,6 +291,8 @@ class Emitter {
 
 
 #### Actividad 2 
+<img width="1438" height="858" alt="image" src="https://github.com/user-attachments/assets/f5673dbb-9800-4a11-8c97-4d9ac673c13c" />
 
 #### Autoevaluación
+
 
