@@ -642,12 +642,13 @@ Los sistemas de partículas revisados gestionan el rendimiento principalmente co
    - La bitácora incluye un concepto definido acompañado de artefactos de diseño (diagramas, bocetos y explicaciones). Cada elemento principal de la obra se vincula directamente con decisiones tomadas durante el proceso. El diseño se reflejó en la obra final de forma coherente, mostrando una implementación clara de lo planeado. A pesar de que hubieron algunos cambios y decisiones de última hora con respecto al boceto, se mantuvo coherente a las bases y conceptos escogidos.
 
 3. **Aplicación Técnica (Código de Actividad 3)**
-   - El código está organizado en clases modulares que encapsulan datos y comportamientos, lo que permite mayor legibilidad y reutilización. Utilicé herencia y composición para diferenciar comportamientos, y documenté claramente cada parte del proceso. El manejo de memoria y arrays se optimizó para mantener un rendimiento estable, en este caso con el splice que ya usaba shiffman en su libro, y el bool isDead(), mostrando un entendimiento de la técnica, además de que logré explorar de nuevo cosas como p5.sound y la rotación de la unidad 4, cosas bastante útiles. La obra no llega a petar pues el numero de particulas es fijo y no aumenta.
+   - El código está organizado en clases modulares que encapsulan datos y comportamientos, lo que permite mayor legibilidad y reutilización. Utilicé herencia y composición para diferenciar comportamientos, y documenté claramente cada parte del proceso. El manejo de memoria y arrays se optimizó para mantener un rendimiento estable, en este caso con filter, que ya usaba shiffman en su libro, y el bool isDead(), mostrando un entendimiento de la técnica, además de que logré explorar de nuevo cosas como p5.sound y la rotación de la unidad 4, cosas bastante útiles. La obra no llega a petar pues el numero de particulas es fijo y no aumenta.
 
 4. **Calidad de la Obra Final (Artefacto Entregado)**
    - La obra final es estable, con un frame rate constante y respuesta interactiva clara. No se limita solo a “funcionar”, sino que además incorpora detalle en la respuesta visual, generando una experiencia amplia y variada. La interacción se mantiene coherente con el concepto planteado (los 6 elementos), evitando errores visuales y garantizando consistencia en la ejecución.
 
 Nota final: 5
+
 
 
 
