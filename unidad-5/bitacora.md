@@ -296,7 +296,8 @@ class Emitter {
 #### Analiza el [ejemplo 4.4: a System of Systems](https://editor.p5js.org/natureofcode/sketches/-xTbGZMim).
 <img width="873" height="325" alt="image" src="https://github.com/user-attachments/assets/93e3132e-6b10-45f4-b24d-e155bbdd3abc" />
 
-#### Que hice?
+
+### Que hice?
 Apliqué el concepto de aplicar fuerza de la unidad 2, a pesar de que ahi ya se aplicaba, en la clase particula y su gravedad. Decidí repasarlo agregandole un viento a las particulas cada vez que se da click, dandole una fuerza horizontal a las particulas.
 #### Como lo hice?
 Simplemente añadiendo este código al sketch, logramos un viento cada vez que se da click, a las partículas actuales.
@@ -320,7 +321,9 @@ Solo sucede en un click, si se queda presionado no funciona. Asi que mejor añad
   }
 ```
 #### Analiza el [ejemplo 4.4: a System of Systems.](https://editor.p5js.org/natureofcode/sketches/s_Y3-Mmo7)
+
 <img width="880" height="331" alt="image" src="https://github.com/user-attachments/assets/a9578608-4d09-4ac4-87c4-432f86de712c" />
+
 #### Que hice?
 Aplique el concepto de walker de la unidad 1 a los emitters que se creaban en el ejemplo, en este caso los walkers tenian un sesgo vertical. Lo hice para repasar la parte de las aleatoriedades recargadas y ver como un walker podia mover un sistema de particulas completo.
 #### Como lo hice?
@@ -393,16 +396,158 @@ class Emitter {
 ```
 Aqui utilizamos el metodo de walker, en donde con unos random, favorece en un 70% a ir hacia abajo si esta de la mitad para arriba de la pantalla, y visceversa. Luego, avanzamos el origen en x y en Y  mostramos un pequeño trail para mostrar donde va. Utilizando shift si se supera el maxtrail, manteniendo rendimiento 🏎️.
 
-#### Analiza el ejemplo 4.5: a Particle System with Inheritance and Polymorphism.
+#### Analiza el [ejemplo 4.5: a Particle System with Inheritance and Polymorphism](https://editor.p5js.org/natureofcode/sketches/2ZlNJp2EW).
 
-#### Analiza el ejemplo 4.6: a Particle System with Forces.
+<img width="875" height="338" alt="image" src="https://github.com/user-attachments/assets/4c4cc3ec-8300-47da-ba18-92af97b12023" />
 
+
+### Que hice?
+Repasando un poco el motion 101 crudo de la unidad 2, decidí implementar aceleraciones random como parte del polimorfismo. Y asi lograr esa explosión de confetti. Lo hice porque sentí que era apropiado para este ejemplo, pues al tener 2 particulas podríamos ver como se sentía tener 2 aceleraciones.
+#### Como lo hice?
+Simplemente añadíamos lo siguiente a particle y confetti.
+```js
+// Simple Particle class
+class Particle {
+  constructor(x, y) {
+    this.position = createVector(x, y);
+    
+    // aceleración inicial random entre 1 y 2
+    let angle = random(TWO_PI);
+    let mag = random(1, 2);
+    this.acceleration = p5.Vector.fromAngle(angle).mult(mag);
+    
+    this.velocity = createVector(random(-1, 1), random(-1, 0));
+    this.lifespan = 255.0;
+  }
+
+  run() {
+    let gravity = createVector(0, 0.05);
+    this.applyForce(gravity);
+    this.update();
+    this.show();
+  }
+
+  applyForce(force) {
+    this.acceleration.add(force);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.lifespan -= 2;
+
+    // reiniciar aceleración después de aplicar fuerzas
+    this.acceleration.mult(0);
+  }
+
+  show() {
+    stroke(0, this.lifespan);
+    strokeWeight(2);
+    fill(127, this.lifespan);
+    circle(this.position.x, this.position.y, 8);
+  }
+
+  isDead() {
+    return this.lifespan < 0.0;
+  }
+}
+
+// Confetti extiende Particle
+class Confetti extends Particle {
+  constructor(x, y) {
+    super(x, y);
+
+    // aceleración inicial random entre 2 y 4
+    let angle = random(TWO_PI);
+    let mag = random(2, 4);
+    this.acceleration = p5.Vector.fromAngle(angle).mult(mag);
+  }
+
+  show() {
+    let angle = map(this.position.x, 0, width, 0, TWO_PI * 2);
+
+    rectMode(CENTER);
+    fill(127, this.lifespan);
+    stroke(0, this.lifespan);
+    strokeWeight(2);
+    push();
+    translate(this.position.x, this.position.y);
+    rotate(angle);
+    square(0, 0, 12);
+    pop();
+  }
+}
+
+```
+Aqui usamos cosas como super, map y algo nuevo para mi que me dio chatGPT, el fromAngle, que nos sirve para vectores con direcciones aleatorias. Ya después con el polimorfismo, en el constructor de confetti le damos la aceleracion distinta a los cuadrados.
+
+#### Analiza el [ejemplo 4.6: a Particle System with Forces](https://editor.p5js.org/natureofcode/sketches/uZ9CfjLHL).
+
+<img width="947" height="651" alt="image" src="https://github.com/user-attachments/assets/a76c0d83-411e-4487-bc98-331a4d5e0074" />
+
+### Que hice?
+Como este sistema que se le aplicaba gravedad parecía una fuente, decidi repasar otro concepto de la unidad 1, el noise. Porque siento que me puede servir para futuras unidades.
+#### Como lo hice?
+Simplemente añadíamos lo siguiente a particle.
+```js
+class Particle {
+  constructor(x, y) {
+    this.position = createVector(x, y);
+    this.acceleration = createVector(0, 0.0);
+    this.velocity = createVector(random(-1, 1), random(-2, 0));
+    this.lifespan = 255.0;
+    this.mass = 1;
+
+    // Color inicial basado en ruido
+    this.noiseOffset = random(1000); // semilla única por partícula
+  }
+
+  run() {
+    this.update();
+    this.show();
+  }
+
+  applyForce(force) {
+    let f = force.copy();
+    f.div(this.mass);
+    this.acceleration.add(f);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+    this.acceleration.mult(0);
+    this.lifespan -= 2.0;
+  }
+
+  show() {
+    // Usamos noise para generar color
+    let n = noise(this.noiseOffset, frameCount * 0.01);
+    let r = map(n, 0, 1, 50, 255);
+    let g = map(noise(this.noiseOffset + 100, frameCount * 0.01), 0, 1, 50, 255);
+    let b = map(noise(this.noiseOffset + 200, frameCount * 0.01), 0, 1, 50, 255);
+
+    stroke(r, g, b, this.lifespan);
+    strokeWeight(2);
+    fill(r, g, b, this.lifespan);
+    circle(this.position.x, this.position.y, 8);
+  }
+
+  isDead() {
+    return this.lifespan < 0.0;
+  }
+}
+
+```
+
+Este repaso fue máß simple, pero clave para recordar los conceptos del noise y familiarizarme cada vez más con métodos como el "map" algo que no había visto mucho antes de javaScript. Aqui, se le da una semilla única a cada particula con ese random entre 1000, y luego en show, se calcula el noise con el metodo noise, el offset, y el conteo de frames, para luego pasar eso a los valores RGB con el metodo map, y luego dibujar cada particula de manera única. El color por supuesto va cambiando, ya que show se va llamando constantemente en un draw.
 #### Analiza el ejemplo 4.7: a Particle System with a Repeller.
 
 #### Rubrica
 <img width="1438" height="858" alt="image" src="https://github.com/user-attachments/assets/f5673dbb-9800-4a11-8c97-4d9ac673c13c" />
 
 #### Autoevaluación
+
 
 
 
