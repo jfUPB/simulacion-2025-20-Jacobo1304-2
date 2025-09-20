@@ -291,8 +291,44 @@ class Emitter {
 
 
 #### Actividad 2 
+#### Revisa detalladamente el ejemplo 4.2: an Array of Particles.
+
+#### Analiza el [ejemplo 4.4: a System of Systems](https://editor.p5js.org/natureofcode/sketches/-xTbGZMim).
+<img width="873" height="325" alt="image" src="https://github.com/user-attachments/assets/93e3132e-6b10-45f4-b24d-e155bbdd3abc" />
+#### Que hice?
+Apliqué el concepto de aplicar fuerza de la unidad 2, a pesar de que ahi ya se aplicaba, en la clase particula y su gravedad. Decidí repasarlo agregandole un viento a las particulas cada vez que se da click, dandole una fuerza horizontal a las particulas.
+#### Como lo hice?
+Simplemente añadiendo este código al sketch, logramos un viento cada vez que se da click, a las partículas actuales.
+```js
+function mousePressed() {
+  let wind = createVector(2, 0); // fuerza hacia la derecha
+  for (let p of particles) {
+    p.applyForce(wind);
+  }
+}
+```
+[!WARNING]
+Problema.
+Solo sucede en un click, si se queda presionado no funciona. Asi que mejor añadi esto en el bucle draw y se soluciono el problema:
+```js
+ if (mouseIsPressed){
+     let wind = createVector(0.01, 0); // fuerza hacia la derecha
+  for (let p of particles) {
+    p.applyForce(wind);
+  }
+  }
+```
+
+#### Analiza el ejemplo 4.5: a Particle System with Inheritance and Polymorphism.
+
+#### Analiza el ejemplo 4.6: a Particle System with Forces.
+
+#### Analiza el ejemplo 4.7: a Particle System with a Repeller.
+
+#### Rubrica
 <img width="1438" height="858" alt="image" src="https://github.com/user-attachments/assets/f5673dbb-9800-4a11-8c97-4d9ac673c13c" />
 
 #### Autoevaluación
+
 
 
