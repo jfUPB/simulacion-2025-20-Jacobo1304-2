@@ -616,6 +616,9 @@ Los sistemas de partículas revisados gestionan el rendimiento principalmente co
 - **Ciclo de vida (`lifespan`)** → cada partícula tiene un tiempo limitado que se va reduciendo en cada frame.  
 - **Chequeo con `isDead()`** → determina cuándo una partícula debe ser eliminada.  
 - **Eliminación con `splice` recorriendo de atrás hacia adelante** → evita errores de índice y mantiene rendimiento aceptable.
+- **filter**
+🔹 No modifica el arreglo original, sino que devuelve uno nuevo con los elementos que cumplen la condición.
+🔹 Muy útil cuando quieres "limpiar" o "depurar" datos, como en tu caso con partículas muertas.
 
 ### ¿Por qué es importante?
 - Mantiene un **número controlado de partículas activas**.  
@@ -648,6 +651,7 @@ Los sistemas de partículas revisados gestionan el rendimiento principalmente co
    - La obra final es estable, con un frame rate constante y respuesta interactiva clara. No se limita solo a “funcionar”, sino que además incorpora detalle en la respuesta visual, generando una experiencia amplia y variada. La interacción se mantiene coherente con el concepto planteado (los 6 elementos), evitando errores visuales y garantizando consistencia en la ejecución.
 
 Nota final: 5
+
 
 
 
