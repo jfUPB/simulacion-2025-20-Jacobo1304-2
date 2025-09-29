@@ -13,11 +13,17 @@ De esta obra, contrario a la anterior, me gusta su consistencia,y que a pesar de
 #### Qué me inspira de su trabajo?
 En lo personal siento que es un muy buen referente para tomar ideas, sus trabajos son muy brutales y orgánicos, y las ideas que se le ocurren con esos algoritmos, además de que lo documenta, son muy útiles como inspiración en obras. Me quedo con el manejo de colores que usa. Y su mezcla de técnicas en las obras.
 ### Actividad 2
+#### ¿Qué es una fuerza de dirección (steering force)?
+
+#### ¿Qué diferencia tiene este tipo de fuerza con las que ya hemos estudiado en el contexto de la simulación de agentes?
+
+#### ¿Qué relación tiene la steering force con Craig Reynolds y su trabajo en simulación de comportamiento animal?
 
 ### Actividad 3
 
 ### Actividad 4
 
 ## Apply: Actividad 5
+
 
 
