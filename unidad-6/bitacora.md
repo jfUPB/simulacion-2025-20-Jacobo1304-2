@@ -547,7 +547,18 @@ Ej2: Si uptown funk de bruno mars dice "Stop... wait a minute" Los boids paran. 
 
 El reto con esto es que no se si se puede identificar la letra de la canción, para hacer algo asi.
 
+#### Un flock grande  con remoras que lo sigan
+Darle comportamientos bacanos al flock grande y que haya pequeños flocksitos que le hagan segunda. Como los bailarines de un cantante.
+#### Componente manual
+Como haremos para controlar las cosas, y tocar las visuales de esa obra como un instrumento músical?
+Varias opciones que se me ocurren también aqui, basado en lo más sencillo pero efectivo:
+Radio del circulo para grupos de flocking
+Resolución del flowfiled.
+Algo con el brillo del color, o la velocidad.
 
+#### Posibles temas:
+Bohemian rhapsody.
+Billie Jean
 
 
 
