@@ -565,6 +565,14 @@ Billie Jean - Buen beat y los instrumentos lo siguen bastante.
 Back in black - AC/DC Misma razon, beat muy marcado y separacion de partes clara.
 Die With a smile (Colaboracion)
 Colgando en tus manos. (Colaboracion)
+Enter Sand man - Muy bacana.
+
+### Recursos clave:
+let fft = new p5.FFT();
+let spectrum = fft.analyze();
+let bass = fft.getEnergy("bass");
+let treble = fft.getEnergy("treble");
+
 
 
 
