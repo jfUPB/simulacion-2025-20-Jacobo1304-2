@@ -180,16 +180,20 @@ Asi la division por resolucion daba un entero.
 ### Separación (Separation): evitar el hacinamiento con vecinos cercanos.
 
  - ¿Cuál es el objetivo de la regla?
- - ¿Cómo calcula el agente la fuerza de dirección correspondiente? (describe la lógica general, ej: “Calcula un vector apuntando lejos de los vecinos demasiado cercanos”).
- 
+   Evitar chocarse con tus compañeros, para esquivar cualquier tipo de posible colisión.
+ - ¿Cómo calcula el agente la fuerza de dirección correspondiente? 
+   Calcula un vector apuntando lejos de los vecinos demasiado cercanos, ignorandose a si mismo para no incurrer en calculos indeseados.
 ### Alineación (Alignment): dirigirse en la misma dirección promedio que los vecinos cercanos.
  - ¿Cuál es el objetivo de la regla?
- - ¿Cómo calcula el agente la fuerza de dirección correspondiente? (describe la lógica general, ej: “Calcula un vector apuntando lejos de los vecinos demasiado cercanos”).
+   Alinear el agente con los demás en un circulo con radio determinado, para que compartan una misma dirección.
+ - ¿Cómo calcula el agente la fuerza de dirección correspondiente? 
+  Calcula un vector que ajusta tu dirección hacia la dirección promedio de los vecinos cercanos.
  
 ### Cohesión (Cohesion): moverse hacia la posición promedio de los vecinos cercanos.
 - ¿Cuál es el objetivo de la regla?
-- ¿Cómo calcula el agente la fuerza de dirección correspondiente? (describe la lógica general, ej: “Calcula un vector apuntando lejos de los vecinos demasiado cercanos”).
-
+  Mantener la posicion en un centro con sus compañeros, para que se muevan junticos en grupito.
+- ¿Cómo calcula el agente la fuerza de dirección correspondiente? 
+  Calcula un vector que apunta hacia la posición promedio (centro de masa) de los vecinos cercanos
 ### Identifica parámetros clave: localiza en el código las variables que controlan:
 El radio (o distancia) de percepción (perceptionRadius o similar) que define quiénes son los “vecinos”. A veces también hay un ángulo de percepción.
 Los pesos o multiplicadores que determinan la influencia relativa de cada una de las tres reglas al combinarlas.
@@ -201,6 +205,7 @@ Modifica significativamente el radio de percepción (hazlo muy pequeño o muy gr
 Introduce un objetivo (target) que todos los boids intenten seguir (usando una fuerza de seek) además de las reglas de flocking, y ajusta su influencia.
 
 ## Apply: Actividad 5
+
 
 
 
