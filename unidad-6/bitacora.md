@@ -534,6 +534,20 @@ class Flock {
 </details>
 ```
 ## Apply: Actividad 5
+### Etapa 1: Decisiones e ideas de diseño:
+Por ahora tengo 2 opciones:
+#### Opcion 1:
+Un programa que basado en la frecuencia de los sonidos vaya modificando las direcciones del flujo y el color de los vehiculos en tiempo real. Dependiendo los graves y agudos, y la amplitud en decibeles del sonido.
+Tambien puede ser con la batería, para que se vea claramente que es rítmico, siento que con ciertas canciones puede ser bastante wow.
+
+#### Opcion 2
+Algo más conceptual en donde la letra del tema vaya afectando el comportamiento del flocking por ejemplo. 
+Ej: Si la canción de merengue dice "nos separamos" se separan los boids.
+Ej2: Si uptown funk de bruno mars dice "Stop... wait a minute" Los boids paran. Y asi.
+
+El reto con esto es que no se si se puede identificar la letra de la canción, para hacer algo asi.
+
+
 
 
 
