@@ -176,8 +176,32 @@ Para arreglar el error relacionado al arreglo de filas y columnas utilice esto:
 ```
 Asi la division por resolucion daba un entero.
 ### Actividad 4
+### Explica las reglas: para cada una de las tres reglas, explica con tus propias palabras:
+### Separación (Separation): evitar el hacinamiento con vecinos cercanos.
+
+ - ¿Cuál es el objetivo de la regla?
+ - ¿Cómo calcula el agente la fuerza de dirección correspondiente? (describe la lógica general, ej: “Calcula un vector apuntando lejos de los vecinos demasiado cercanos”).
+ 
+### Alineación (Alignment): dirigirse en la misma dirección promedio que los vecinos cercanos.
+ - ¿Cuál es el objetivo de la regla?
+ - ¿Cómo calcula el agente la fuerza de dirección correspondiente? (describe la lógica general, ej: “Calcula un vector apuntando lejos de los vecinos demasiado cercanos”).
+ 
+### Cohesión (Cohesion): moverse hacia la posición promedio de los vecinos cercanos.
+- ¿Cuál es el objetivo de la regla?
+- ¿Cómo calcula el agente la fuerza de dirección correspondiente? (describe la lógica general, ej: “Calcula un vector apuntando lejos de los vecinos demasiado cercanos”).
+
+### Identifica parámetros clave: localiza en el código las variables que controlan:
+El radio (o distancia) de percepción (perceptionRadius o similar) que define quiénes son los “vecinos”. A veces también hay un ángulo de percepción.
+Los pesos o multiplicadores que determinan la influencia relativa de cada una de las tres reglas al combinarlas.
+La velocidad máxima (maxspeed) y la fuerza máxima (maxforce) de los agentes (similar a Flow Fields).
+
+### Experimenta con modificaciones: realiza al menos una de las siguientes modificaciones en el código, ejecuta y describe el efecto observado en el comportamiento colectivo del enjambre:
+Cambia drásticamente el peso de una de las reglas (ej: pon la cohesión a cero, o la separación muy alta).
+Modifica significativamente el radio de percepción (hazlo muy pequeño o muy grande).
+Introduce un objetivo (target) que todos los boids intenten seguir (usando una fuerza de seek) además de las reglas de flocking, y ajusta su influencia.
 
 ## Apply: Actividad 5
+
 
 
 
