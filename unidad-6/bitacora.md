@@ -547,7 +547,7 @@ Ej2: Si uptown funk de bruno mars dice "Stop... wait a minute" Los boids paran. 
 
 El reto con esto es que no se si se puede identificar la letra de la canción, para hacer algo asi.
 
-#### Un flock grande  con remoras que lo sigan
+#### 3 Un flock grande  con remoras que lo sigan
 Darle comportamientos bacanos al flock grande y que haya pequeños flocksitos que le hagan segunda. Como los bailarines de un cantante.
 #### Componente manual
 Como haremos para controlar las cosas, y tocar las visuales de esa obra como un instrumento músical?
@@ -556,9 +556,15 @@ Radio del circulo para grupos de flocking
 Resolución del flowfiled.
 Algo con el brillo del color, o la velocidad.
 
+#### Cancion colaborativa:
+Con una canción en donde cante un hombre y una mujer, tener un array de boids para el hombre y un array de boids para la mujer, y aparecen en los momentos que canta cada uno, y cuando cantan los 2, salen los 2
+
 #### Posibles temas:
-Bohemian rhapsody.
-Billie Jean
+Bohemian rhapsody. Buena separacion de partes, en la parte de la opera se puede jugar bastante, oscureciendo el fondo yd emás.
+Billie Jean - Buen beat y los instrumentos lo siguen bastante.
+Back in black - AC/DC Misma razon, beat muy marcado y separacion de partes clara.
+Die With a smile (Colaboracion)
+Colgando en tus manos. (Colaboracion)
 
 
 
