@@ -175,7 +175,10 @@ Para arreglar el error relacionado al arreglo de filas y columnas utilice esto:
     this.rows = Math.ceil(height / this.resolution);
 ```
 Asi la division por resolucion daba un entero.
-### Actividad 4
+### Actividad 4: Flocking
+
+<img width="941" height="301" alt="image" src="https://github.com/user-attachments/assets/5eecabc8-d249-4b3e-ba8e-6d3260c1e604" />
+
 ### Explica las reglas: para cada una de las tres reglas, explica con tus propias palabras:
 ### Separación (Separation): evitar el hacinamiento con vecinos cercanos.
 
@@ -195,16 +198,343 @@ Asi la division por resolucion daba un entero.
 - ¿Cómo calcula el agente la fuerza de dirección correspondiente? 
   Calcula un vector que apunta hacia la posición promedio (centro de masa) de los vecinos cercanos
 ### Identifica parámetros clave: localiza en el código las variables que controlan:
-El radio (o distancia) de percepción (perceptionRadius o similar) que define quiénes son los “vecinos”. A veces también hay un ángulo de percepción.
-Los pesos o multiplicadores que determinan la influencia relativa de cada una de las tres reglas al combinarlas.
-La velocidad máxima (maxspeed) y la fuerza máxima (maxforce) de los agentes (similar a Flow Fields).
+# Parámetros y variables clave — Boids / Flocking
+
+## Variables de la clase `Boid` (estado y límites)
+- `this.position`  
+  - **Qué**: vector (x,y) con la posición actual del boid.  
+  - **Dónde**: `constructor(x,y)` y se actualiza en `update()`.  
+  - **Efecto**: determina dónde está el boid en el espacio y qué vecinos se consideran.
+
+- `this.velocity`  
+  - **Qué**: vector velocidad actual.  
+  - **Dónde**: `constructor`, modificado en `update()` y usado en `show()` para orientar el triángulo.  
+  - **Efecto**: dirección y rapidez instantánea del boid.
+
+- `this.acceleration`  
+  - **Qué**: vector que acumula fuerzas aplicadas (se resetea cada frame).  
+  - **Dónde**: `applyForce()` y `update()` (`this.acceleration.mult(0)`).  
+  - **Efecto**: determina el cambio de velocidad por frame (A = F).
+
+- `this.r`  
+  - **Qué**: radio / tamaño del boid (en píxeles).  
+  - **Dónde**: `constructor` (`this.r = 3.0`).  
+  - **Efecto**: tamaño gráfico y posible margen para colisiones / wraparound.
+
+- `this.maxspeed`  
+  - **Qué**: velocidad máxima (magnitud) permitida.  
+  - **Dónde**: `constructor` (`this.maxspeed = 3`) y aplicada en `update()` con `this.velocity.limit(this.maxspeed)`.  
+  - **Efecto**: controla qué tan rápido puede moverse un boid (afecta reacción y estilo del enjambre).
+
+- `this.maxforce`  
+  - **Qué**: máxima magnitud de fuerza de steering (aceleración máxima).  
+  - **Dónde**: `constructor` (`this.maxforce = 0.05`) y aplicada en `seek()`, `separate()`, `align()`.  
+  - **Efecto**: controla la maniobrabilidad; valores bajos → giros suaves, valores altos → giros bruscos.
+
+## Parámetros de comportamiento / reglas (por boid)
+- `desiredSeparation` (en `separate(boids)`)  
+  - **Qué**: distancia (px) a la que se considera que un vecino está “demasiado cerca”.  
+  - **Dónde**: `let desiredSeparation = 25;`  
+  - **Efecto**: mayor valor → más separación entre boids; menor → más cercanía / posible agrupamiento.
+
+- `neighborDistance` (en `align(boids)` y `cohere(boids)`)  
+  - **Qué**: radio (px) para considerar vecinos en alineación y cohesión.  
+  - **Dónde**: `let neighborDistance = 50;` en ambos métodos.  
+  - **Efecto**: define el vecindario social: mayor radio → influencias desde más lejos (mayor cohesión/alineación).
+
+- Pesos de las fuerzas en `flock(boids)`  
+  - **Qué**: multiplicadores que equilibran la influencia de cada regla.  
+  - **Dónde**:
+    ```js
+    sep.mult(1.5);
+    ali.mult(1.0);
+    coh.mult(1.0);
+    ```
+  - **Efecto**: ajustar estos valores cambia la conducta global (ej. aumentar `sep` hace al enjambre dispersarse más; aumentar `coh` hace que converjan).
+
+## Variables / constantes globales y de simulación
+- Número de boids (`f.boids.length` / cómo se instancia en `sketch.js`)  
+  - **Qué**: cuántos agentes hay.  
+  - **Efecto**: más boids → interacciones más densas y mayor coste computacional.
+
+- `width`, `height`, `createCanvas(...)`  
+  - **Qué**: dimensiones del área de simulación.  
+  - **Efecto**: tamaño del espacio (influye en densidad y visualización).
+
+## Funciones clave (lógica / flujo)
+- `applyForce(force)`  
+  - **Qué**: añade `force` a `acceleration`.  
+  - **Efecto**: interfaz para combinar fuerzas (separation, alignment, cohesion).
+
+- `seek(target)`  
+  - **Qué**: calcula el steering vector que apunta hacia `target`.  
+  - **Efecto**: base para la cohesión (steer hacia el centro) y otros comportamientos de seguimiento.
+
+- `update()`  
+  - **Qué**: integra aceleración → velocidad → posición y limita velocidad.  
+  - **Efecto**: aplica la física básica cada frame.
+
+- `borders()`  
+  - **Qué**: wraparound (teletransporta al boid al otro lado del canvas si sale).  
+  - **Efecto**: evita que los boids desaparezcan fuera del canvas; condiciona patrones de movimiento.
+
+## Valores que conviene exponer para experimentar
+- `this.maxspeed` (velocidad máxima) — ej. `1..6`  
+- `this.maxforce` (maniobrabilidad) — ej. `0.01..0.5`  
+- `desiredSeparation` — ej. `10..50`  
+- `neighborDistance` — ej. `30..120`  
+- Pesos: `sep`, `ali`, `coh` — ej. `sep 0..3`, `ali 0..2`, `coh 0..2`  
+- `boidCount` — cantidad de boids para la simulación  
+- `this.r` — tamaño visual del boid
+
+
 
 ### Experimenta con modificaciones: realiza al menos una de las siguientes modificaciones en el código, ejecuta y describe el efecto observado en el comportamiento colectivo del enjambre:
 Cambia drásticamente el peso de una de las reglas (ej: pon la cohesión a cero, o la separación muy alta).
 Modifica significativamente el radio de percepción (hazlo muy pequeño o muy grande).
 Introduce un objetivo (target) que todos los boids intenten seguir (usando una fuerza de seek) además de las reglas de flocking, y ajusta su influencia.
 
+<img width="871" height="488" alt="image" src="https://github.com/user-attachments/assets/4b186c4e-3b1e-42c9-a8e8-73546a239bc9" />
+### Moodificaciones realizadas:
+Implementé un target al que siguen todos los boids, mientras siguen aplicando las otras reglas.
+Le baje un poco al radio de deteccion de vecinos, y ahora se hacen grupos más pequeños.
+### Código:
+<details> <summary><strong>📄 sketch.js</strong></summary>
+
+```js
+// sketch.js
+// The Nature of Code
+// Daniel Shiffman
+// http://natureofcode.com
+
+let flock;
+let target;
+
+function setup() {
+  createCanvas(640, 360);
+  flock = new Flock();
+
+  // Crear boids iniciales
+  for (let i = 0; i < 100; i++) {
+    let b = new Boid(random(width), random(height));
+    flock.addBoid(b);
+  }
+
+  // Inicialmente, el target está en el centro
+  target = createVector(width / 2, height / 2);
+}
+
+function draw() {
+  background(51);
+
+  // Actualizar target con el mouse
+  target.set(mouseX, mouseY);
+
+  // Dibujar el target como un círculo rojo
+  fill(255, 0, 0);
+  noStroke();
+  ellipse(target.x, target.y, 16, 16);
+
+  flock.run();
+}
+```
+</details>
+<details>
+<summary><strong>🕊️ Boid.js </strong></summary>
+
+**Qué hace:** define la clase `Boid` con estado (posición, velocidad, aceleración), implementa las tres reglas de flocking (separación, alineación, cohesión), la función `seek()` y la integración física (`applyForce`, `update`). Además incorpora la fuerza de `seek(target)` para que los boids persigan el objetivo global.
+
+```javascript
+// Boid.js
+// Boid class
+// Métodos para Separation, Cohesion, Alignment añadidos
+// Ahora incluye fuerza de seek hacia un target
+
+class Boid {
+  constructor(x, y) {
+    this.acceleration = createVector(0, 0);
+    this.velocity = createVector(random(-1, 1), random(-1, 1));
+    this.position = createVector(x, y);
+    this.r = 3.0;
+    this.maxspeed = 3;     // Velocidad máxima
+    this.maxforce = 0.05;  // Fuerza de giro máxima
+  }
+
+  run(boids) {
+    this.flock(boids);
+    this.update();
+    this.borders();
+    this.show();
+  }
+
+  applyForce(force) {
+    this.acceleration.add(force);
+  }
+
+  flock(boids) {
+    let sep = this.separate(boids);    // Separación
+    let ali = this.align(boids);       // Alineación
+    let coh = this.cohere(boids);      // Cohesión
+    let seekTarget = this.seek(target); // Fuerza hacia el objetivo global
+
+    // Ponderación de fuerzas
+    sep.mult(1.5);
+    ali.mult(1.0);
+    coh.mult(1.0);
+    seekTarget.mult(0.5); // Ajusta la influencia del target
+
+    // Aplicar fuerzas
+    this.applyForce(sep);
+    this.applyForce(ali);
+    this.applyForce(coh);
+    this.applyForce(seekTarget);
+  }
+
+  update() {
+    this.velocity.add(this.acceleration);
+    this.velocity.limit(this.maxspeed);
+    this.position.add(this.velocity);
+    this.acceleration.mult(0);
+  }
+
+  seek(target) {
+    let desired = p5.Vector.sub(target, this.position);
+    desired.normalize();
+    desired.mult(this.maxspeed);
+    let steer = p5.Vector.sub(desired, this.velocity);
+    steer.limit(this.maxforce);
+    return steer;
+  }
+
+  show() {
+    let angle = this.velocity.heading();
+    fill(127);
+    stroke(0);
+    push();
+    translate(this.position.x, this.position.y);
+    rotate(angle);
+    beginShape();
+    vertex(this.r * 2, 0);
+    vertex(-this.r * 2, -this.r);
+    vertex(-this.r * 2, this.r);
+    endShape(CLOSE);
+    pop();
+  }
+
+  borders() {
+    if (this.position.x < -this.r) this.position.x = width + this.r;
+    if (this.position.y < -this.r) this.position.y = height + this.r;
+    if (this.position.x > width + this.r) this.position.x = -this.r;
+    if (this.position.y > height + this.r) this.position.y = -this.r;
+  }
+
+  // -------------------
+  // Reglas de flocking
+  // -------------------
+
+  // Separación: alejarse de los vecinos cercanos
+  separate(boids) {
+    let desiredSeparation = 25;
+    let steer = createVector(0, 0);
+    let count = 0;
+    for (let i = 0; i < boids.length; i++) {
+      let d = p5.Vector.dist(this.position, boids[i].position);
+      if (d > 0 && d < desiredSeparation) {
+        let diff = p5.Vector.sub(this.position, boids[i].position);
+        diff.normalize();
+        diff.div(d); // Más fuerte cuanto más cerca
+        steer.add(diff);
+        count++;
+      }
+    }
+    if (count > 0) {
+      steer.div(count);
+    }
+    if (steer.mag() > 0) {
+      steer.normalize();
+      steer.mult(this.maxspeed);
+      steer.sub(this.velocity);
+      steer.limit(this.maxforce);
+    }
+    return steer;
+  }
+
+  // Alineación: ajustar dirección hacia la de los vecinos
+  align(boids) {
+    let neighborDistance = 50;
+    let sum = createVector(0, 0);
+    let count = 0;
+    for (let i = 0; i < boids.length; i++) {
+      let d = p5.Vector.dist(this.position, boids[i].position);
+      if (d > 0 && d < neighborDistance) {
+        sum.add(boids[i].velocity);
+        count++;
+      }
+    }
+    if (count > 0) {
+      sum.div(count);
+      sum.normalize();
+      sum.mult(this.maxspeed);
+      let steer = p5.Vector.sub(sum, this.velocity);
+      steer.limit(this.maxforce);
+      return steer;
+    } else {
+      return createVector(0, 0);
+    }
+  }
+
+  // Cohesión: moverse hacia el centro de los vecinos
+  cohere(boids) {
+    let neighborDistance = 50;
+    let sum = createVector(0, 0);
+    let count = 0;
+    for (let i = 0; i < boids.length; i++) {
+      let d = p5.Vector.dist(this.position, boids[i].position);
+      if (d > 0 && d < neighborDistance) {
+        sum.add(boids[i].position);
+        count++;
+      }
+    }
+    if (count > 0) {
+      sum.div(count);
+      return this.seek(sum);
+    } else {
+      return createVector(0, 0);
+    }
+  }
+}
+```
+</details>
+
+<details>
+<summary><strong>📦 Flock.js </strong></summary>
+
+**Qué hace:** clase simple que contiene el array `boids`, ejecuta `run()` sobre todos y permite añadir boids con `addBoid()`.
+
+
+```js
+// Flock.js
+// Flock object
+// Maneja el array de todos los boids
+
+class Flock {
+  constructor() {
+    this.boids = [];
+  }
+
+  run() {
+    for (let boid of this.boids) {
+      boid.run(this.boids);
+    }
+  }
+
+  addBoid(b) {
+    this.boids.push(b);
+  }
+</details>
+```
 ## Apply: Actividad 5
+
 
 
 
