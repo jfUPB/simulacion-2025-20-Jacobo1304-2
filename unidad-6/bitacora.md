@@ -575,6 +575,14 @@ let treble = fft.getEnergy("treble");
 
 
 
+### El código fuente completo de tu sketch en p5.js.
+
+### Un enlace a tu sketch en el editor de p5.js.
+
+### Capturas de pantalla mostrando tu pieza en acción.
+
+
+
 
 
 
