@@ -21,3 +21,14 @@ Parche en el ojo, dibujando el concepto en la misma plabra y de manera muy senci
 Esta me parece brutal, pues el mismo eclipse está pintado en la plabra sin afectar en absoluto la escritura.
 
 #### Tus propias ideas (descripción o boceto simple) para representar visualmente 2-3 palabras distintas de forma estática.
+
+#### OJO - Sencillo, se suele usar para estas cosas, pues se le puede pintar 
+
+#### Shampoo - Las últimas 2 O pueden ser burbujas.
+
+#### Gol - La o puede ser el balón y se puede dibujar un arco atrás, quedaría mejor con animación.
+
+
+
+## Apply
+Idea: RAP. lA r O LA p TIRAN UN MICROFONO.
