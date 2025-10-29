@@ -27,9 +27,34 @@ El liveness me parece clave. Es lo que le da a cada sesion un toque unico, y hac
 ## Actividad 2
 Iniciarás el proceso de diseño. Define el concepto visual general, selecciona la pieza musical y determina qué inputs utilizarás para interpretar la música en tiempo real:
 
+### Bocetos:
+
+Posibles temas:
+
+Cant stop - RHCP
+Humo - Rupa trupa 
+Breathe (in the air) - pink floyd.
+Ojalá (Silvio Rodríguez)
+Love never felt so good - Michael Jackson
+
+#### Elección final: Cants stop RHCP
+
+<img width="322" height="156" alt="image" src="https://github.com/user-attachments/assets/fe33a4de-1cad-48b2-87da-8c13a63b2def" />
+
+### La pregunta del millón: Que algoritmos uso??
+En principio y las bases que quiero que tenga el boceto son las siguientes.
+
+Un crescendo en lo visual al inicio que acompañe la introducción. 
+Flocks que se muevan a velocidad variable según lo vaya controlando. Para dividir las partes.
+Presets para las diferentes etapas. Intro - Verso - Coro - Puente y solo.
+
+
+Climax en el solo de guitarra.
+
 
 ## Actividad 3
 #### El código fuente completo de tu sketch en p5.js.
 #### Un enlace a tu sketch en el editor de p5.js.
 #### Capturas de pantalla mostrando tu pieza en acción.
+
 
