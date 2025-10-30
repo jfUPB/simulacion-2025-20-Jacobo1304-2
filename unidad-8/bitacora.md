@@ -232,6 +232,9 @@ function windowResized() {
 <img width="1446" height="1026" alt="image" src="https://github.com/user-attachments/assets/9d4e34c4-1ce1-4e6b-908b-e8d5490ce2f5" />
 
 
+#### Auto evaluaci[on:
+Cumplí con las 3 activiades asi que creo que me merezco un 5.
+
 
 
 
