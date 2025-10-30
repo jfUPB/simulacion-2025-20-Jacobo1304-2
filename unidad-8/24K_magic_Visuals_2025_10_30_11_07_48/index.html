@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <!-- Controles fuera del canvas se generarán desde sketch.js -->
+  
+  <!-- === Conexión de scripts (orden correcto) === -->
+
+  <!-- Clases base -->
+  <script src="preset.js"></script>
+  <script src="VisualizerManager.js"></script>
+
+  <!-- Elementos comunes -->
+  <script src="Boid.js"></script>
+  <script src="particle.js"></script>
+  <script src="emitter.js"></script>
+
+  <!-- Presets -->
+  <script src="presetFlocking.js"></script>
+  <script src="presetParticles.js"></script>
+  <script src="presetFractals.js"></script>
+  <script src="presetGrid.js"></script>
+
+  <!-- Sketch principal -->
+  <script src="sketch.js"></script>
+  </body>
+</html>
