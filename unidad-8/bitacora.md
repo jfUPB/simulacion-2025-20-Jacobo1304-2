@@ -36,28 +36,29 @@ Humo - Rupa trupa
 Breathe (in the air) - pink floyd.
 Ojalá (Silvio Rodríguez)
 Love never felt so good - Michael Jackson
-24K magic - Bruno Mars
+24K magic - Bruno Mars /// Elegida.
 Back in black. - ACDC
 
 #### Elección final: 24K magic - Bruno Mars
 
 <img width="322" height="156" alt="image" src="https://github.com/user-attachments/assets/fe33a4de-1cad-48b2-87da-8c13a63b2def" />
 
+Ventajas: Climax y breakDowns claros.
+
 ### La pregunta del millón: Que algoritmos uso??
 En principio y las bases que quiero que tenga el boceto son las siguientes.
 
 Un crescendo en lo visual al inicio que acompañe la introducción. 
 Flocks que se muevan a velocidad variable según lo vaya controlando. Para dividir las partes.
-Presets para las diferentes etapas. Intro - Verso - Coro - Puente y solo.
+Presets para las diferentes etapas. Intro - Verso - Coro - Puente y final.
 
-
-Climax en el solo de guitarra.
-
+#### Bocetos:
 
 ## Actividad 3
 #### El código fuente completo de tu sketch en p5.js.
 #### Un enlace a tu sketch en el editor de p5.js.
 #### Capturas de pantalla mostrando tu pieza en acción.
+
 
 
 
