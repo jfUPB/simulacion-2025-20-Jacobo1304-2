@@ -226,6 +226,13 @@ function windowResized() {
 #### Capturas de pantalla mostrando tu pieza en acción.
 <img width="1472" height="1007" alt="image" src="https://github.com/user-attachments/assets/ffd2289b-994d-42c7-a6d8-1efdac9b5fce" />
 
+<img width="1435" height="998" alt="image" src="https://github.com/user-attachments/assets/a97746d3-fdbd-4629-9096-39cccf0b2c79" />
+
+
+<img width="1446" height="1026" alt="image" src="https://github.com/user-attachments/assets/9d4e34c4-1ce1-4e6b-908b-e8d5490ce2f5" />
+
+
+
 
 
 
