@@ -41,7 +41,8 @@ Back in black. - ACDC
 
 #### Elección final: 24K magic - Bruno Mars
 
-<img width="322" height="156" alt="image" src="https://github.com/user-attachments/assets/fe33a4de-1cad-48b2-87da-8c13a63b2def" />
+<img width="1000" height="1000" alt="image" src="https://github.com/user-attachments/assets/89ecae6a-cc17-4e73-a284-3fde5cc57042" />
+
 
 Ventajas: Climax y breakDowns claros.
 
@@ -58,6 +59,7 @@ Presets para las diferentes etapas. Intro - Verso - Coro - Puente y final.
 #### El código fuente completo de tu sketch en p5.js.
 #### Un enlace a tu sketch en el editor de p5.js.
 #### Capturas de pantalla mostrando tu pieza en acción.
+
 
 
 
