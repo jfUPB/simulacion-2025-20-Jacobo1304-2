@@ -36,8 +36,10 @@ Humo - Rupa trupa
 Breathe (in the air) - pink floyd.
 Ojalá (Silvio Rodríguez)
 Love never felt so good - Michael Jackson
+24K magic - Bruno Mars
+Back in black. - ACDC
 
-#### Elección final: Cants stop RHCP
+#### Elección final: 24K magic - Bruno Mars
 
 <img width="322" height="156" alt="image" src="https://github.com/user-attachments/assets/fe33a4de-1cad-48b2-87da-8c13a63b2def" />
 
@@ -56,5 +58,6 @@ Climax en el solo de guitarra.
 #### El código fuente completo de tu sketch en p5.js.
 #### Un enlace a tu sketch en el editor de p5.js.
 #### Capturas de pantalla mostrando tu pieza en acción.
+
 
 
