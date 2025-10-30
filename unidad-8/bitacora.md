@@ -55,10 +55,14 @@ Presets para las diferentes etapas. Intro - Verso - Coro - Puente y final.
 
 #### Bocetos:
 
+![Imagen de WhatsApp 2025-10-29 a las 22 26 55_ee71a5b7](https://github.com/user-attachments/assets/632edd3d-ea11-4688-8bb2-2ceada82d4ad)
+
+
 ## Actividad 3
 #### El código fuente completo de tu sketch en p5.js.
 #### Un enlace a tu sketch en el editor de p5.js.
 #### Capturas de pantalla mostrando tu pieza en acción.
+
 
 
 
